@@ -7,8 +7,8 @@ namespace GEX
 	struct AircraftMover{
 	
 		AircraftMover(float vx, float vy) : velocity(vx, vy){}
-		void operator() (Plane& plane, sf::Time) const {
-			plane.accelerate(velocity);
+		void operator() (Frog& Frog, sf::Time) const {
+			Frog.accelerate(velocity);
 		}
 
 		sf::Vector2f velocity;
@@ -17,8 +17,8 @@ namespace GEX
 	struct AircraftRotator {
 
 		AircraftRotator(float vSpeed) : rotation(vSpeed) {}
-		void operator() (Plane& plane, sf::Time) const {
-			plane.setRotation(plane.getRotation() + rotation);
+		void operator() (Frog& Frog, sf::Time) const {
+			Frog.setRotation(Frog.getRotation() + rotation);
 		}
 
 		float rotation;
@@ -83,10 +83,10 @@ namespace GEX
 		const float playerSpeed = 200.f;
 		const float rotation = .30f;
 
-		_actionBindings[Action::moveLeft].action		= derivedAction<Plane>(AircraftMover(-playerSpeed, 0));
-		_actionBindings[Action::moveRight].action       = derivedAction<Plane>(AircraftMover(playerSpeed, 0));
-		_actionBindings[Action::moveUp].action			= derivedAction<Plane>(AircraftMover(0, -playerSpeed));
-		_actionBindings[Action::moveDown].action		= derivedAction<Plane>(AircraftMover(0, playerSpeed));
+		_actionBindings[Action::moveLeft].action		= derivedAction<Frog>(AircraftMover(-playerSpeed, 0));
+		_actionBindings[Action::moveRight].action       = derivedAction<Frog>(AircraftMover(playerSpeed, 0));
+		_actionBindings[Action::moveUp].action			= derivedAction<Frog>(AircraftMover(0, -playerSpeed));
+		_actionBindings[Action::moveDown].action		= derivedAction<Frog>(AircraftMover(0, playerSpeed));
 		
 		for (auto& pair : _actionBindings)
 			pair.second.category = Category::player;

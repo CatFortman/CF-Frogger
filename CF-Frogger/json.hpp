@@ -7639,7 +7639,7 @@ class basic_json
         @brief create a string from one or two Unicode code points
 
         There are two cases: (1) @a codepoint1 is in the Basic Multilingual
-        Plane (U+0000 through U+FFFF) and @a codepoint2 is 0, or (2)
+        Frog (U+0000 through U+FFFF) and @a codepoint2 is 0, or (2)
         @a codepoint1 and @a codepoint2 are a UTF-16 surrogate pair to
         represent a code point above U+FFFF.
 

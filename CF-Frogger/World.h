@@ -38,7 +38,7 @@ namespace GEX
 		void			update(sf::Time deltaTime);
 
 		void			draw();
-		Plane*			getPlayer() { return _player; }
+		Frog*			getPlayer() { return _player; }
 		CommandQueue&	getCommandQueue();
 
 		bool			hasAlivePlayer() const;
@@ -48,11 +48,11 @@ namespace GEX
 
 		struct SpawnPoint
 		{
-			SpawnPoint(Plane::Type type, float _x, float _y) :
+			SpawnPoint(Frog::Type type, float _x, float _y) :
 				type(type),
 				x(_x),
 				y(_y) {}
-			Plane::Type type;
+			Frog::Type type;
 			float		x;
 			float		y;
 		};
@@ -68,7 +68,7 @@ namespace GEX
 
 		void			spawnEnemies();
 		void			addEnemies();
-		void			addEnemy(Plane::Type type, float relX, float relY);
+		void			addEnemy(Frog::Type type, float relX, float relY);
 		void			addEnemy(SpawnPoint point);
 
 		void			handleCollisions();
@@ -94,9 +94,9 @@ namespace GEX
 		sf::FloatRect						_worldBounds;
 		sf::Vector2f						_spawnPosition;
 		float								_scrollSpeed;
-		Plane*								_player;
+		Frog*								_player;
 		std::vector<SpawnPoint>				_enemySpawnPoints;
 
-		std::vector<Plane*>					_activeEnemies;
+		std::vector<Frog*>					_activeEnemies;
 	};
 }

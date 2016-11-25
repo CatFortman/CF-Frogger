@@ -8,17 +8,16 @@
 #include <cassert>
 namespace GEX 
 {
-	const std::map<Plane::Type, AircraftData> table = initializeAircraftData();
+	const std::map<Frog::Type, FrogData> table = initializeFrogData();
 
-	TextureID toTextureID(Plane::Type type)
+	TextureID toTextureID(Frog::Type type)
 	{
 		return TextureID::Frog;
 	}
 
-	Plane::Plane(Type type) :
-		Entity(table.at(type).hitPoints),
+	Frog::Frog(Type type) :
 		_type(type),
-		_sprite(TextureHolder::getInstance().get(table.at(type).texture), table.at(type).textureRect),
+		//_sprite(TextureHolder::getInstance().get(table.at(type).texture), table.at(type).textureRect),
 		_directionIndex(0),
 
 		_isMarkedForRemoval(false)
@@ -34,7 +33,7 @@ namespace GEX
 		// build mini-HUD for aircraft
 		//
 
-		// TextureHolder::getInstance().load(TextureID::AIRPLANE, "../media/Textures/eagles.png");
+		// TextureHolder::getInstance().load(TextureID::AIRFrog, "../media/Textures/Froggers.png");
 		sf::FloatRect bounds = _sprite.getLocalBounds();
 		_sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
 
@@ -44,11 +43,11 @@ namespace GEX
 		attatchChild(std::move(healthDisplay));
 	}
 
-	unsigned int Plane::getCategory() const
+	unsigned int Frog::getCategory() const
 	{
 		switch (_type)
 		{
-		case GEX::Plane::Type::Eagle:
+		case GEX::Frog::Type::Frogger:
 		default:
 			assert(0); //missing type
 			break;
@@ -57,17 +56,17 @@ namespace GEX
 		return Category::none;
 	}
 
-	sf::FloatRect Plane::getBoundingRect() const
+	sf::FloatRect Frog::getBoundingRect() const
 	{
 		return getWorldTransform().transformRect(_sprite.getGlobalBounds());
 	}
 
-	void Plane::drawCurrent(sf::RenderTarget & target, sf::RenderStates state) const
+	void Frog::drawCurrent(sf::RenderTarget & target, sf::RenderStates state) const
 	{
 		target.draw(_sprite, state);
 	}
 
-	void Plane::movementUpdate(sf::Time dt)
+	void Frog::movementUpdate(sf::Time dt)
 	{
 		const std::vector<Direction>& directions = table.at(_type).directions;
 		if (!directions.empty())
@@ -86,7 +85,7 @@ namespace GEX
 		}
 	}
 
-	void Plane::updateCurrent(sf::Time dt, CommandQueue& commands)
+	void Frog::updateCurrent(sf::Time dt, CommandQueue& commands)
 	{
 		// normalize speed
 		// needed when travelling diagonl
@@ -96,7 +95,6 @@ namespace GEX
 
 		if (isDestroyed())
 		{
-			// drop a pickup??
 			return;
 		}
 
@@ -106,24 +104,24 @@ namespace GEX
 		updateTexts();
 	}
 
-	void Plane::updateTexts()
+	void Frog::updateTexts()
 	{
 		_healthDisplay->setText(std::to_string(getHitPoints()) + "HP");
 		_healthDisplay->setPosition(0.f, 50.f);
 		_healthDisplay->setRotation(-getRotation());
 	}
 
-	float Plane::getMaxSpeed() const
+	float Frog::getMaxSpeed() const
 	{
 		return table.at(_type).speed;
 	}
 
-	bool Plane::isAllied() const
+	bool Frog::isAllied() const
 	{
-		return _type == Type::Eagle;
+		return _type == Type::Frogger;
 	}
 
-	bool Plane::isMarkedForRemoval() const
+	bool Frog::isMarkedForRemoval() const
 	{
 		return isDestroyed();
 	}
