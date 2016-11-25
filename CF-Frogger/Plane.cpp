@@ -69,20 +69,6 @@ namespace GEX
 	void Frog::movementUpdate(sf::Time dt)
 	{
 		const std::vector<Direction>& directions = table.at(_type).directions;
-		if (!directions.empty())
-		{
-			float distanceToTravel = directions.at(_directionIndex).distance;
-			if (_travelDistance > distanceToTravel)
-			{
-				_directionIndex = (_directionIndex + 1) % directions.size();
-				_travelDistance = 0;
-			}
-			_travelDistance += getMaxSpeed() * dt.asSeconds();
-			float dirAngle = directions.at(_directionIndex).angle + 90.f;
-			float vx = getMaxSpeed() * GEX::cos(dirAngle);
-			float vy = getMaxSpeed() * GEX::sin(dirAngle);
-			setVelocity(vx, vy);
-		}
 	}
 
 	void Frog::updateCurrent(sf::Time dt, CommandQueue& commands)
@@ -111,10 +97,6 @@ namespace GEX
 		_healthDisplay->setRotation(-getRotation());
 	}
 
-	float Frog::getMaxSpeed() const
-	{
-		return table.at(_type).speed;
-	}
 
 	bool Frog::isAllied() const
 	{

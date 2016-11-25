@@ -31,7 +31,9 @@ namespace GEX
 	{
 		std::map<Frog::Type, FrogData> data;
 
-		
+		data[Frog::Type::Frogger].hitPoints = 100;
+		data[Frog::Type::Frogger].texture = TextureID::Frog;
+		data[Frog::Type::Frogger].textureRect = sf::IntRect(0, 0, 48, 64);
 
 		return data;
 	}

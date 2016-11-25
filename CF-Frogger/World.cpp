@@ -52,17 +52,15 @@ namespace GEX
 		_worldView(window.getDefaultView()),
 		_sceneGraph(),
 		_sceneLayers(),
-		_worldBounds(0.f, 0.f, _worldView.getSize().x, 2000.f),
+		_worldBounds(0.f, 0.f, _worldView.getSize().x, _worldView.getSize().y),
 		_spawnPosition(_worldView.getSize().x / 2.f, _worldBounds.height - (_worldView.getSize().y / 2)),
-		_scrollSpeed(-50.0f),
 		_queue(),
 		_player(nullptr)
 	{
 		buildScene();
 
-
 		//sets teh view to the bottom since we will scroll upwards
-		_worldView.setCenter(_spawnPosition);
+		//_worldView.setCenter(_spawnPosition);
 
 	}
 
@@ -175,20 +173,6 @@ namespace GEX
 	void World::addEnemies()
 	{
 		// add enemy spawn points
-		addEnemy(Frog::Type::Raptor, -250, 900);
-		addEnemy(Frog::Type::Raptor, 300, 1800);
-		addEnemy(Frog::Type::Raptor, 400, 600);
-		addEnemy(Frog::Type::Raptor, 150, 1200);
-
-		addEnemy(Frog::Type::Raptor, -150, 700);
-		addEnemy(Frog::Type::Raptor, 250, 400);
-		addEnemy(Frog::Type::Raptor, -350, 1500);
-		addEnemy(Frog::Type::Raptor, 250, 1000);
-
-		/*addEnemy(Frog::Type::Avenger, -450, 400);
-		addEnemy(Frog::Type::Avenger, 250, 800);
-		addEnemy(Frog::Type::Avenger, 350, 200);
-		addEnemy(Frog::Type::Avenger, -250, 900);*/
 
 		std::sort(_enemySpawnPoints.begin(), _enemySpawnPoints.end(), [](SpawnPoint lhs, SpawnPoint rhs) {return lhs.y < rhs.y;	});
 	}
@@ -238,7 +222,6 @@ namespace GEX
 		std::unique_ptr<Frog> Frog(new Frog(Frog::Type::Frogger));
 		_player = Frog.get();
 		_player->setPosition(_spawnPosition);
-		_player->setVelocity(40.f, _scrollSpeed);
 		_sceneLayers[Ground]->attatchChild(std::move(Frog));
 
 		/*std::unique_ptr<SpriteNode> _background2(new SpriteNode(texture2, textureRect));

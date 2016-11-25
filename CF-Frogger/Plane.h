@@ -24,8 +24,6 @@ namespace GEX
 
 		sf::FloatRect			getBoundingRect() const override;
 
-		float					getMaxSpeed() const;
-
 		bool					isAllied() const;
 		bool					isMarkedForRemoval() const;
 

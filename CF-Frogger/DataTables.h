@@ -33,7 +33,6 @@ namespace GEX
 	struct FrogData
 	{
 		int						hitPoints;
-		float					speed;
 		TextureID				texture;
 		std::vector<Direction>  directions; // vector describes path of Frog
 		sf::IntRect				textureRect;
