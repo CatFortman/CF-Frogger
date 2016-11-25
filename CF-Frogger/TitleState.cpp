@@ -12,10 +12,11 @@ namespace GEX
 		_textEffectTime(sf::Time::Zero)
 	{
 		_backgroundSprite.setTexture(TextureHolder::getInstance().get(TextureID::TitleScreen));
-		_backgroundSprite.setScale(2.2, 1.2);
 
 		_text.setFont(FontHolder::getInstance().get(FontID::Main));
 		_text.setString("Press any key to start");
+		_text.setScale(.5, .5);
+		_text.setFillColor(sf::Color::Red);
 		centerOrigin(_text);
 		_text.setPosition(context.window->getView().getSize() / 2.f);
 	}
