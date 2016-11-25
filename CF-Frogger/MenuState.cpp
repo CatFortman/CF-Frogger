@@ -16,6 +16,7 @@ namespace GEX
 		_mGUIContainer()
 	{
 		_mBackgroundSprite.setTexture(TextureHolder::getInstance().get(TextureID::MenuScreen));
+		_mBackgroundSprite.setScale(2, 2);
 
 		auto gPlayButton = std::make_shared<GUI::Button>(TextureHolder::getInstance().get(TextureID::GreenPlay), TextureHolder::getInstance().get(TextureID::RedPlay));
 		gPlayButton->setPosition(400.f,400.f);
