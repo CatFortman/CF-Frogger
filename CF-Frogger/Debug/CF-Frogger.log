@@ -1,4 +1,3 @@
 ﻿  TitleState.cpp
-c:\users\bunny\desktop\classes\firstterm\game dev c++\cf-frogger\cf-frogger\titlestate.cpp(15): warning C4305: 'argument': truncation from 'double' to 'float'
   CF-Frogger.vcxproj -> C:\Users\bunny\Desktop\Classes\FirstTerm\Game Dev C++\CF-Frogger\Debug\CF-Frogger.exe
   CF-Frogger.vcxproj -> C:\Users\bunny\Desktop\Classes\FirstTerm\Game Dev C++\CF-Frogger\Debug\CF-Frogger.pdb (Partial PDB)

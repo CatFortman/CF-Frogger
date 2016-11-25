@@ -16,9 +16,10 @@ namespace GEX
 		_mGUIContainer()
 	{
 		_mBackgroundSprite.setTexture(TextureHolder::getInstance().get(TextureID::MenuScreen));
+		_mBackgroundSprite.setScale(1.5, 1.25);
 
 		auto gPlayButton = std::make_shared<GUI::Button>(TextureHolder::getInstance().get(TextureID::GreenPlay), TextureHolder::getInstance().get(TextureID::RedPlay));
-		gPlayButton->setPosition(400.f,400.f);
+		gPlayButton->setPosition(145.f,400.f);
 		gPlayButton->setCallback([this]()
 		{
 			requestStackPop();
@@ -32,6 +33,7 @@ namespace GEX
 		{
 			requestStackPop();
 		});
+
 		_mGUIContainer.pack(rQuitButton);
 
 		context.music->play(MusicID::MenuTheme);
