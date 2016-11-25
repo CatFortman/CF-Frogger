@@ -25,7 +25,7 @@ namespace GEX
 
 		FontHolder::getInstance().load(FontID::Main, "Media/Player.ttf");
 		TextureHolder::getInstance().load(TextureID::TitleScreen, "Media/Textures/FroggerTitle.png");
-		TextureHolder::getInstance().load(TextureID::MenuScreen, "Media/Textures/TitleScreen.png");
+		TextureHolder::getInstance().load(TextureID::MenuScreen, "Media/Textures/frogger.png");
 		TextureHolder::getInstance().load(TextureID::Face, "Media/Textures/face.png");
 		TextureHolder::getInstance().load(TextureID::RedQuit, "Media/Textures/quitRed.png");
 		TextureHolder::getInstance().load(TextureID::GreenQuit, "Media/Textures/quitGreen.png");
