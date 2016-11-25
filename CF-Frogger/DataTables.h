@@ -30,13 +30,11 @@ namespace GEX
 		float distance;
 	};
 
-	struct AircraftData
+	struct FrogData
 	{
 		int						hitPoints;
-		float					speed;
 		TextureID				texture;
-		sf::Time				fireInterval;
-		std::vector<Direction>  directions; // vector describes path of plane
+		std::vector<Direction>  directions; // vector describes path of Frog
 		sf::IntRect				textureRect;
 	};
 
@@ -46,6 +44,6 @@ namespace GEX
 		sf::Time								lifetime;
 	};
 
-	std::map<Plane::Type, AircraftData>				initializeAircraftData();
+	std::map<Frog::Type, FrogData>					initializeFrogData();
 	std::map<Particle::Type, ParticleData>			initializeParticleData();
 }

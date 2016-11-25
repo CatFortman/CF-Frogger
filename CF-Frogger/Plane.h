@@ -9,22 +9,20 @@ namespace GEX
 {
 	class TextNode;
 
-	class Plane : public Entity
+	class Frog : public Entity
 	{
 	public:
-		enum class  Type{ Eagle, Raptor, Avenger};
+		enum class  Type{ Frogger};
 		
 	public:
-								Plane(Type type = Type::Eagle);
-								//Plane(Planes type, const TextureHolder& textures);
+								Frog(Type type = Type::Frogger);
+								//Frog(Frogs type, const TextureHolder& textures);
 
-		virtual					~Plane() {};
+		virtual					~Frog() {};
 
 		unsigned int			getCategory() const override;
 
 		sf::FloatRect			getBoundingRect() const override;
-
-		float					getMaxSpeed() const;
 
 		bool					isAllied() const;
 		bool					isMarkedForRemoval() const;

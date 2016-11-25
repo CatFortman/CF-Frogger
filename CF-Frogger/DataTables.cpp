@@ -27,11 +27,13 @@ namespace GEX
 	Direction::Direction(float a, float d) : angle(a), distance(d)
 	{}
 
-	std::map<Plane::Type, AircraftData> initializeAircraftData()
+	std::map<Frog::Type, FrogData> initializeFrogData()
 	{
-		std::map<Plane::Type, AircraftData> data;
+		std::map<Frog::Type, FrogData> data;
 
-		
+		data[Frog::Type::Frogger].hitPoints = 100;
+		data[Frog::Type::Frogger].texture = TextureID::Frog;
+		data[Frog::Type::Frogger].textureRect = sf::IntRect(0, 0, 48, 64);
 
 		return data;
 	}

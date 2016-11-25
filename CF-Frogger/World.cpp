@@ -52,17 +52,15 @@ namespace GEX
 		_worldView(window.getDefaultView()),
 		_sceneGraph(),
 		_sceneLayers(),
-		_worldBounds(0.f, 0.f, _worldView.getSize().x, 2000.f),
+		_worldBounds(0.f, 0.f, _worldView.getSize().x, _worldView.getSize().y),
 		_spawnPosition(_worldView.getSize().x / 2.f, _worldBounds.height - (_worldView.getSize().y / 2)),
-		_scrollSpeed(-50.0f),
 		_queue(),
 		_player(nullptr)
 	{
 		buildScene();
 
-
 		//sets teh view to the bottom since we will scroll upwards
-		_worldView.setCenter(_spawnPosition);
+		//_worldView.setCenter(_spawnPosition);
 
 	}
 
@@ -77,7 +75,7 @@ namespace GEX
 		//_worldView.rotate(0.001); //spins!
 
 		//background
-		//_worldView.move(0.f, _scrollSpeed * deltaTime.asSeconds()); // moves the view which moves the background moves and not the planes
+		//_worldView.move(0.f, _scrollSpeed * deltaTime.asSeconds()); // moves the view which moves the background moves and not the Frogs
 		//_player->setVelocity(0.f, 0.f);
 
 		//destroyEnemiesOutsideView(); // sets hp = 0 if outside of view
@@ -164,7 +162,7 @@ namespace GEX
 		while (!_enemySpawnPoints.empty() && (_enemySpawnPoints.back().y > getBattlefieldBounds().top))
 		{
 			auto spawn = _enemySpawnPoints.back();
-			std::unique_ptr<Plane> enemy(new Plane(spawn.type));
+			std::unique_ptr<Frog> enemy(new Frog(spawn.type));
 			enemy->setPosition(spawn.x, spawn.y);
 			enemy->setRotation(180);
 			_sceneLayers[Ground]->attatchChild(std::move(enemy));
@@ -175,25 +173,11 @@ namespace GEX
 	void World::addEnemies()
 	{
 		// add enemy spawn points
-		addEnemy(Plane::Type::Raptor, -250, 900);
-		addEnemy(Plane::Type::Raptor, 300, 1800);
-		addEnemy(Plane::Type::Raptor, 400, 600);
-		addEnemy(Plane::Type::Raptor, 150, 1200);
-
-		addEnemy(Plane::Type::Raptor, -150, 700);
-		addEnemy(Plane::Type::Raptor, 250, 400);
-		addEnemy(Plane::Type::Raptor, -350, 1500);
-		addEnemy(Plane::Type::Raptor, 250, 1000);
-
-		/*addEnemy(Plane::Type::Avenger, -450, 400);
-		addEnemy(Plane::Type::Avenger, 250, 800);
-		addEnemy(Plane::Type::Avenger, 350, 200);
-		addEnemy(Plane::Type::Avenger, -250, 900);*/
 
 		std::sort(_enemySpawnPoints.begin(), _enemySpawnPoints.end(), [](SpawnPoint lhs, SpawnPoint rhs) {return lhs.y < rhs.y;	});
 	}
 
-	void World::addEnemy(Plane::Type type, float relX, float relY)
+	void World::addEnemy(Frog::Type type, float relX, float relY)
 	{
 		addEnemy(SpawnPoint(type, relX, relY));
 	}
@@ -220,7 +204,7 @@ namespace GEX
 		//background
 		sf::Texture& texture = TextureHolder::getInstance().get(TextureID::Background);
 		sf::IntRect textureRect(_worldBounds);
-		texture.setRepeated(true);
+		//texture.setRepeated(true);
 
 		std::unique_ptr<SpriteNode> _background(new SpriteNode(texture, textureRect));
 		_background->setPosition(_worldBounds.left, _worldBounds.top);
@@ -235,14 +219,10 @@ namespace GEX
 		//_sceneLayers[Air]->attatchChild(std::move(fireNode));
 
 		// Aircraft
-		/*std::unique_ptr<Plane> plane(new Plane(Plane::Type::Eagle));
-		_playerAircraft = plane.get();
-		_playerAircraft->setPosition(_spawnPosition);
-		_playerAircraft->setVelocity(40.f, _scrollSpeed);
-		_sceneLayers[Air]->attatchChild(std::move(plane));
-
-		sf::Texture& texture2 = TextureHolder::getInstance().get(TextureID::CloudTransparent);
-		texture2.setRepeated(true);*/
+		std::unique_ptr<Frog> Frog(new Frog(Frog::Type::Frogger));
+		_player = Frog.get();
+		_player->setPosition(_spawnPosition);
+		_sceneLayers[Ground]->attatchChild(std::move(Frog));
 
 		/*std::unique_ptr<SpriteNode> _background2(new SpriteNode(texture2, textureRect));
 		_background2->setPosition(_worldBounds.left, _worldBounds.top);
@@ -269,8 +249,8 @@ namespace GEX
 			if (matchesCategories(pair, Category::none, Category::none))
 			{
 				// safe downcasts
-				auto& player = static_cast<Plane&>(*pair.first);
-				auto& enemy = static_cast<Plane&>(*pair.second);
+				auto& player = static_cast<Frog&>(*pair.first);
+				auto& enemy = static_cast<Frog&>(*pair.second);
 
 				// collision: player damage = enemy's remaining hp
 				player.damage(enemy.getHitPoints());
