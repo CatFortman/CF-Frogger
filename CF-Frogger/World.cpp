@@ -204,7 +204,6 @@ namespace GEX
 		//background
 		sf::Texture& texture = TextureHolder::getInstance().get(TextureID::Background);
 		sf::IntRect textureRect(_worldBounds);
-		//texture.setRepeated(true);
 
 		std::unique_ptr<SpriteNode> _background(new SpriteNode(texture, textureRect));
 		_background->setPosition(_worldBounds.left, _worldBounds.top);
@@ -218,18 +217,27 @@ namespace GEX
 		//std::unique_ptr<ParticleNode> fireNode(new ParticleNode(Particle::Type::propellant));
 		//_sceneLayers[Air]->attatchChild(std::move(fireNode));
 
-		// Aircraft
+		// Frogger
 		std::unique_ptr<Frog> Frog(new Frog(Frog::Type::Frogger));
 		_player = Frog.get();
 		_player->setPosition(_spawnPosition);
-		_sceneLayers[Background]->attatchChild(std::move(Frog));
+		_sceneLayers[Ground]->attatchChild(std::move(Frog));
 
-		/*std::unique_ptr<SpriteNode> _background2(new SpriteNode(texture2, textureRect));
-		_background2->setPosition(_worldBounds.left, _worldBounds.top);
-		_sceneLayers[Air]->attatchChild(std::move(_background2));
+		// Frog lives
+		sf::Texture& texture2 = TextureHolder::getInstance().get(TextureID::FrogLives);
+		sf::IntRect textureRect2(395,100,39,40);
 
+		std::unique_ptr<SpriteNode> _frogLife1(new SpriteNode(texture2, textureRect2));
+		_frogLife1->setPosition(_worldView.getSize().x / 5.f, _worldBounds.height - 50);
+		_sceneLayers[Background]->attatchChild(std::move(_frogLife1));
 
-		addEnemies();*/
+		std::unique_ptr<SpriteNode> _frogLife2(new SpriteNode(texture2, textureRect2));
+		_frogLife2->setPosition(_worldView.getSize().x / 8.f, _worldBounds.height - 50);
+		_sceneLayers[Background]->attatchChild(std::move(_frogLife2));
+
+		std::unique_ptr<SpriteNode> _frogLife3(new SpriteNode(texture2, textureRect2));
+		_frogLife3->setPosition(_worldView.getSize().x / 20.f, _worldBounds.height - 50);
+		_sceneLayers[Background]->attatchChild(std::move(_frogLife3));
 	}
 
 	void World::handleCollisions()
