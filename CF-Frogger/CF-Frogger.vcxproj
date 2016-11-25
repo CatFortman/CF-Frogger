@@ -18,6 +18,91 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Animation2.cpp" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="CommandQueue.cpp" />
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Container.cpp" />
+    <ClCompile Include="DataTables.cpp" />
+    <ClCompile Include="DemoNode.cpp" />
+    <ClCompile Include="Emmitter.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="FontHolder.cpp" />
+    <ClCompile Include="GameOver.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="GexState.cpp" />
+    <ClCompile Include="JsonFrameParser.cpp" />
+    <ClCompile Include="Label.cpp" />
+    <ClCompile Include="MenuState.cpp" />
+    <ClCompile Include="MusicPlayer.cpp" />
+    <ClCompile Include="ParticleNode.cpp" />
+    <ClCompile Include="PauseState.cpp" />
+    <ClCompile Include="plane.cpp" />
+    <ClCompile Include="PlayerControl.cpp" />
+    <ClCompile Include="SceneNode.cpp" />
+    <ClCompile Include="SoundBufferHolder.cpp" />
+    <ClCompile Include="SoundNode.cpp" />
+    <ClCompile Include="SoundPlayer.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="SpriteNode.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateStack.cpp" />
+    <ClCompile Include="TextNode.cpp" />
+    <ClCompile Include="TextureHolder.cpp" />
+    <ClCompile Include="TitleState.cpp" />
+    <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="World.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="Animation2.h" />
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Category.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="CommandQueue.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="Container.h" />
+    <ClInclude Include="DataTables.h" />
+    <ClInclude Include="DemoNode.h" />
+    <ClInclude Include="Emmitter.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="FontHolder.h" />
+    <ClInclude Include="GameOver.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="GexState.h" />
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="JsonFrameParser.hpp" />
+    <ClInclude Include="Label.h" />
+    <ClInclude Include="MenuState.h" />
+    <ClInclude Include="MusicPlayer.h" />
+    <ClInclude Include="Partcile.h" />
+    <ClInclude Include="ParticleNode.h" />
+    <ClInclude Include="PauseState.h" />
+    <ClInclude Include="plane.h" />
+    <ClInclude Include="PlayerControl.h" />
+    <ClInclude Include="ResourceIdentifiers.h" />
+    <ClInclude Include="SceneNode.h" />
+    <ClInclude Include="SoundBufferHolder.h" />
+    <ClInclude Include="SoundNode.h" />
+    <ClInclude Include="SoundPlayer.h" />
+    <ClInclude Include="SpriteNode.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateIdentifiers.h" />
+    <ClInclude Include="StateStack.h" />
+    <ClInclude Include="TextNode.h" />
+    <ClInclude Include="TextureHolder.h" />
+    <ClInclude Include="TitleState.h" />
+    <ClInclude Include="Utility.h" />
+    <ClInclude Include="World.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Zombie5.json" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{97591D19-C533-4B7B-AB4F-06F54B1FA553}</ProjectGuid>
     <RootNamespace>CFFrogger</RootNamespace>
@@ -117,9 +202,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Source.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

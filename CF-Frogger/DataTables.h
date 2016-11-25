@@ -30,22 +30,22 @@ namespace GEX
 		float distance;
 	};
 
-	struct CatData
+	struct AircraftData
 	{
 		int						hitPoints;
 		float					speed;
 		TextureID				texture;
-		std::vector<Direction>  directions; // vector describes path of plyer
+		sf::Time				fireInterval;
+		std::vector<Direction>  directions; // vector describes path of plane
 		sf::IntRect				textureRect;
 	};
 
-	
 	struct ParticleData
 	{
 		sf::Color								color;
 		sf::Time								lifetime;
 	};
 
-	std::map<Cat::Type, CatData>					initializeCatData();
+	std::map<Plane::Type, AircraftData>				initializeAircraftData();
 	std::map<Particle::Type, ParticleData>			initializeParticleData();
 }

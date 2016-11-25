@@ -4,20 +4,9 @@
 #include <SFML/Graphics/Text.hpp>
 #include <cmath>
 #include <cassert>
-#include <random>
 
 namespace GEX
 {
-	namespace
-	{
-		std::default_random_engine createRandomEngine()
-		{
-			auto seed = static_cast<unsigned long>(std::time(nullptr));
-			return std::default_random_engine(seed);
-		}
-		auto RandomEngine = createRandomEngine();
-	}
-
 	void centerOrigin(sf::Sprite& sprite)
 	{
 		sf::FloatRect bounds = sprite.getLocalBounds();
@@ -34,12 +23,6 @@ namespace GEX
 	{
 		sf::FloatRect bounds = animation.getLocalBounds();
 		animation.setOrigin(std::floor(bounds.left + bounds.width / 2.f), std::floor(bounds.top + bounds.height / 2.f));
-	}
-
-	int randomInt(int exclusiveMax)
-	{
-		std::uniform_int_distribution<> distr(0, exclusiveMax - 1);
-		return distr(RandomEngine);
 	}
 
 	float length(sf::Vector2f vector)

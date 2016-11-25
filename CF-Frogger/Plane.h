@@ -4,29 +4,21 @@
 #include "Command.h"
 #include "CommandQueue.h"
 #include "Animation.h"
-#include "SoundNode.h"
-#include "Utility.h"
-#include "Animation.h"
-#include "Animation2.h"
-#include "JsonFrameParser.hpp"
-
-#include <map>
 
 namespace GEX 
 {
 	class TextNode;
 
-	class Cat : public Entity
+	class Plane : public Entity
 	{
 	public:
-		enum class  Type{ Cat};
-		enum class  State { Walk, Idle, Dead, Attack };
+		enum class  Type{ Eagle, Raptor, Avenger};
 		
 	public:
-								Cat(Type type = Type::Cat);
+								Plane(Type type = Type::Eagle);
 								//Plane(Planes type, const TextureHolder& textures);
 
-		virtual					~Cat() {};
+		virtual					~Plane() {};
 
 		unsigned int			getCategory() const override;
 
@@ -34,7 +26,8 @@ namespace GEX
 
 		float					getMaxSpeed() const;
 
-		void					playLocalSound(CommandQueue& commands, SoundEffectID effectID);
+		bool					isAllied() const;
+		bool					isMarkedForRemoval() const;
 
 	private:
 		void					drawCurrent(sf::RenderTarget & target, sf::RenderStates state) const;
@@ -42,16 +35,16 @@ namespace GEX
 		void					updateTexts();
 		void					movementUpdate(sf::Time dt);
 
+
 	private:
 
-		Type												_type;
-		sf::Sprite											_sprite;
-		State												_state;
-		TextNode*											_healthDisplay;
-		std::map<State, std::unique_ptr<Animation2>>        _animations;
-		int													_directionIndex;
-		float												_travelDistance;
+		Type					_type;
+		sf::Sprite				_sprite;
+		TextNode*				_healthDisplay;
+		int						_directionIndex;
+		float					_travelDistance;
 
+		bool					_isMarkedForRemoval;
 	};
 
 }

@@ -1,20 +1,3 @@
-/**
-@file
-@author  D Burchill <david.burchill@nbcc.ca>
-@version 1.0
-
-@section LICENSE
-
-This software is based on the material accompanying the book "SFML Game Development" see License.txt
-These additions and modifications are my sole work for prog 1266
-
-@section DESCRIPTION
-
-The SceneNode class is the base class for any object that is to be put in the scene graph. Wich means any game
-objects including background, Non-Player-Objects (NPOs), and the player object.
-*/
-
-
 #include "SoundPlayer.h"
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
@@ -24,7 +7,7 @@ objects including background, Non-Player-Objects (NPOs), and the player object.
 
 
 #include <cmath>
- 
+
 
 
 namespace GEX
@@ -43,13 +26,6 @@ namespace GEX
 
 	SoundPlayer::SoundPlayer()
 	{
-		SoundBufferHolder::getInstance().load(SoundEffectID::AlliedGunfire, "Media/Sound/AlliedGunfire.wav");
-		SoundBufferHolder::getInstance().load(SoundEffectID::EnemyGunfire, "Media/Sound/EnemyGunfire.wav");
-		SoundBufferHolder::getInstance().load(SoundEffectID::Explosion1, "Media/Sound/Explosion1.wav");
-		SoundBufferHolder::getInstance().load(SoundEffectID::Explosion2, "Media/Sound/Explosion2.wav");
-		SoundBufferHolder::getInstance().load(SoundEffectID::LaunchMissile, "Media/Sound/LaunchMissile.wav");
-		SoundBufferHolder::getInstance().load(SoundEffectID::CollectPickup, "Media/Sound/CollectPickup.wav");
-		SoundBufferHolder::getInstance().load(SoundEffectID::Button, "Media/Sound/Button.wav");
 
 		// Listener points towards the screen (default in SFML)
 		sf::Listener::setDirection(0.f, 0.f, -1.f);
@@ -62,15 +38,9 @@ namespace GEX
 
 	void SoundPlayer::play(SoundEffectID effect, sf::Vector2f position)
 	{
-		std::list<sf::Sound> slist;
 
-		slist.push_back(sf::Sound(SoundBufferHolder::getInstance().get(effect)));
-
-		sf::Sound tmp = slist.back();
-
-
-		sf::Sound bang(SoundBufferHolder::getInstance().get(effect));
-		_sounds.push_back(tmp);
+		sf::Sound soundEffect(SoundBufferHolder::getInstance().get(effect));
+		_sounds.push_back(soundEffect);
 
 		sf::Sound& sound = _sounds.back();
 

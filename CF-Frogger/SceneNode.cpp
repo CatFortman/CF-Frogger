@@ -13,19 +13,19 @@ namespace GEX
 		return length(lhs.getWorldPosition() - rhs.getWorldPosition());
 	}
 
-	int      SceneNode::objCount = 0;
+	int      SceneNode::_objCount = 0;
 
 	SceneNode::SceneNode(Category::type cat) :
 		_parent(nullptr),
 		_defaultCategory(cat)
 	{
-		std::cout << ++objCount << std::endl;
+		std::cout << ++_objCount << std::endl;
 	}
 
 
 	SceneNode::~SceneNode()
 	{
-		std::cout << --objCount << std::endl;
+		std::cout << --_objCount << std::endl;
 	}
 
 	void SceneNode::attatchChild(ptr child)

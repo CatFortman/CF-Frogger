@@ -8,39 +8,47 @@
 #include <cassert>
 namespace GEX 
 {
-	const std::map<Cat::Type, CatData> table = initializeCatData();
+	const std::map<Plane::Type, AircraftData> table = initializeAircraftData();
 
-	TextureID toTextureID(Cat::Type type)
+	TextureID toTextureID(Plane::Type type)
 	{
-		switch (type) {
-		case Cat::Type::Cat:
-			return TextureID::Cat;
-		}
-		return TextureID::Cat;
+		return TextureID::Frog;
 	}
 
-	Cat::Cat(Type type) :
+	Plane::Plane(Type type) :
+		Entity(table.at(type).hitPoints),
 		_type(type),
 		_sprite(TextureHolder::getInstance().get(table.at(type).texture), table.at(type).textureRect),
-		_directionIndex(0)
+		_directionIndex(0),
+
+		_isMarkedForRemoval(false)
 	{
-		centerOrigin(_sprite);
 		// set up the animation
-		JsonFrameParser* frames = new JsonFrameParser("Media/Zombie.json");
-		_animations[State::Walk] = std::unique_ptr<Animation2>(new Animation2());
-		_animations[State::Walk]->addFrameSet(frames->getFramesFor("walk"));
-		//_animations[State::MoveBack]->addFrame({ 45,0,45,0 });
-		_animations[State::Walk]->setDurationAsSeconds(1.f);
-		_sprite.setTextureRect(_animations[State::Walk]->getFrameByNumber(0));
+
+		centerOrigin(_sprite);
+		//
+		// build fire and launch commands
+		//
+		
+		//
+		// build mini-HUD for aircraft
+		//
+
+		// TextureHolder::getInstance().load(TextureID::AIRPLANE, "../media/Textures/eagles.png");
+		sf::FloatRect bounds = _sprite.getLocalBounds();
+		_sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+
+		std::unique_ptr<TextNode> healthDisplay(new TextNode(std::to_string(getHitPoints()) + "HP"));
+		_healthDisplay = healthDisplay.get();
+		healthDisplay->setPosition(0.f, 50.f);
+		attatchChild(std::move(healthDisplay));
 	}
 
-	unsigned int Cat::getCategory() const
+	unsigned int Plane::getCategory() const
 	{
 		switch (_type)
 		{
-		case GEX::Cat::Type::Cat:
-			return Category::playerCharacter;
-			break;
+		case GEX::Plane::Type::Eagle:
 		default:
 			assert(0); //missing type
 			break;
@@ -49,17 +57,17 @@ namespace GEX
 		return Category::none;
 	}
 
-	sf::FloatRect Cat::getBoundingRect() const
+	sf::FloatRect Plane::getBoundingRect() const
 	{
 		return getWorldTransform().transformRect(_sprite.getGlobalBounds());
 	}
 
-	void Cat::drawCurrent(sf::RenderTarget & target, sf::RenderStates state) const
+	void Plane::drawCurrent(sf::RenderTarget & target, sf::RenderStates state) const
 	{
 		target.draw(_sprite, state);
 	}
 
-	void Cat::movementUpdate(sf::Time dt)
+	void Plane::movementUpdate(sf::Time dt)
 	{
 		const std::vector<Direction>& directions = table.at(_type).directions;
 		if (!directions.empty())
@@ -78,42 +86,45 @@ namespace GEX
 		}
 	}
 
-	void Cat::updateCurrent(sf::Time dt, CommandQueue& commands)
+	void Plane::updateCurrent(sf::Time dt, CommandQueue& commands)
 	{
-		// update animation
-		_sprite.setTextureRect(_animations.at(_state)->update(dt));
-
 		// normalize speed
+		// needed when travelling diagonl
+		sf::Vector2f velo = getVelocity();
+		if (velo.x != 0.f && velo.y != 0.f)
+			setVelocity(velo / std::sqrt(2.f));
+
+		if (isDestroyed())
+		{
+			// drop a pickup??
+			return;
+		}
+
 		movementUpdate(dt);
 		Entity::updateCurrent(dt, commands);
 
 		updateTexts();
 	}
 
-	void Cat::updateTexts()
+	void Plane::updateTexts()
 	{
 		_healthDisplay->setText(std::to_string(getHitPoints()) + "HP");
 		_healthDisplay->setPosition(0.f, 50.f);
 		_healthDisplay->setRotation(-getRotation());
 	}
 
-	float Cat::getMaxSpeed() const
+	float Plane::getMaxSpeed() const
 	{
 		return table.at(_type).speed;
 	}
 
-	void Cat::playLocalSound(CommandQueue& commands, SoundEffectID effectID)
+	bool Plane::isAllied() const
 	{
-		sf::Vector2f worldPosition = getWorldPosition();
+		return _type == Type::Eagle;
+	}
 
-		Command command;
-		command.category = Category::SoundEffect;
-		command.action = derivedAction<SoundNode>(
-			[effectID, worldPosition](SoundNode& node, sf::Time)
-		{
-			node.playSound(effectID, worldPosition);
-		});
-
-		commands.push(command);
+	bool Plane::isMarkedForRemoval() const
+	{
+		return isDestroyed();
 	}
 }

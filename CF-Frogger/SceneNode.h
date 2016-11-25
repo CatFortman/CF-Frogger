@@ -73,7 +73,7 @@ namespace GEX
 		SceneNode*					_parent;
 		std::vector<ptr>			_children;
 		Category::type				_defaultCategory;
-		static int       objCount;
+		static int					_objCount;
 	};
 
 	float							distance(const SceneNode& lhs, const SceneNode& rhs);

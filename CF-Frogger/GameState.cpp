@@ -7,7 +7,7 @@ namespace GEX
 {
 	GameState::GameState(StateStack& stack, Context context) :
 		State(stack, context),
-		_world(*context.window, *context.soundEffect),
+		_world(*context.window),
 		_player(*context.player)
 	{
 		context.music->play(MusicID::MissionTheme);

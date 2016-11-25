@@ -27,14 +27,11 @@ namespace GEX
 	Direction::Direction(float a, float d) : angle(a), distance(d)
 	{}
 
-	std::map<Cat::Type, CatData> initializeCatData()
+	std::map<Plane::Type, AircraftData> initializeAircraftData()
 	{
-		std::map<Cat::Type, CatData> data;
+		std::map<Plane::Type, AircraftData> data;
 
-		data[Cat::Type::Cat].hitPoints = 100;
-		data[Cat::Type::Cat].speed = 200.f;
-		data[Cat::Type::Cat].texture = TextureID::Cat;
-		data[Cat::Type::Cat].textureRect = sf::IntRect(0, 0, 48, 64);
+		
 
 		return data;
 	}

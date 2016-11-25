@@ -18,32 +18,21 @@ namespace GEX
 	Application::Application() :
 		_window(sf::VideoMode(1024, 768), "States", sf::Style::Close),
 		_player(),
-		_stateStack(State::Context(_window, _player, _music, _soundPlayer)),
+		_stateStack(State::Context(_window, _player, _music, _sounds)),
 		_statsText()
 	{
 		_window.setKeyRepeatEnabled(false);
 
 		FontHolder::getInstance().load(FontID::Main, "Media/Player.ttf");
-		TextureHolder::getInstance().load(TextureID::TitleScreen, "Media/Textures/Title.jpg");
+		TextureHolder::getInstance().load(TextureID::TitleScreen, "Media/Textures/FroggerTitle.png");
 		TextureHolder::getInstance().load(TextureID::MenuScreen, "Media/Textures/TitleScreen.png");
-		TextureHolder::getInstance().load(TextureID::Eagle, "Media/Textures/Entities.png");
-		TextureHolder::getInstance().load(TextureID::Raptor, "Media/Textures/Entities.png");
-		TextureHolder::getInstance().load(TextureID::Desert, "Media/Textures/Desert.png");
-		TextureHolder::getInstance().load(TextureID::Jungle, "Media/Textures/Jungle.png");
-		TextureHolder::getInstance().load(TextureID::Cloud, "Media/Textures/Cloud.jpg");
-		TextureHolder::getInstance().load(TextureID::CloudTransparent, "Media/Textures/Cloud2.png");
 		TextureHolder::getInstance().load(TextureID::Face, "Media/Textures/face.png");
 		TextureHolder::getInstance().load(TextureID::RedQuit, "Media/Textures/quitRed.png");
 		TextureHolder::getInstance().load(TextureID::GreenQuit, "Media/Textures/quitGreen.png");
 		TextureHolder::getInstance().load(TextureID::RedPlay, "Media/Textures/startRed.png");
 		TextureHolder::getInstance().load(TextureID::GreenPlay, "Media/Textures/startGreen.png");
-		TextureHolder::getInstance().load(TextureID::Bullet, "Media/Textures/Entities.png");
-		TextureHolder::getInstance().load(TextureID::Missile, "Media/Textures/Entities.png");
 		TextureHolder::getInstance().load(TextureID::Particle, "Media/Textures/particle.png");
 		TextureHolder::getInstance().load(TextureID::Explosion, "Media/Textures/Explosion.png");
-		TextureHolder::getInstance().load(TextureID::FinishLine, "Media/Textures/FinishLine.png");
-		TextureHolder::getInstance().load(TextureID::Atlas, "Media/Textures/Entities.png");
-		TextureHolder::getInstance().load(TextureID::Cat, "Media/Textures/Zombie5.png");
 
 		_statsText.setFont(FontHolder::getInstance().get(FontID::Main));
 		_statsText.setPosition(5.f, 5.f);

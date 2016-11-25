@@ -28,9 +28,6 @@ namespace GEX
 		float result = atan2(opp, adj) * 180 / M_PI;
 		return result;
 	}
-
-	int randomInt(int exclusive);
-
 	float length(sf::Vector2f vector);
 	sf::Vector2f unitVector(sf::Vector2f vector);
 }

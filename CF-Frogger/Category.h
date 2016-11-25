@@ -5,10 +5,12 @@ namespace GEX
 	{
 		enum type {
 			none = 0,		// 0000 0000
-			ParticleSystem = 1 << 0,		// 1000 0000
-			Ground = 1 << 1,
-			SoundEffect = 1 << 2,
-			playerCharacter = 1 << 3
+			player = 1 << 0,
+			sceneGroundLayer = 1 << 1,	// 0000 0001
+			playerCharacter = 1 << 2,	// 0000 0010
+			enemy = 1 << 3,	// 0000 0100
+			SoundEffect = 1 << 4,
+			ParticleSystem = 1 << 5		// 1000 0000
 
 		};
 	}

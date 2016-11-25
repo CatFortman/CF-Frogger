@@ -19,7 +19,6 @@ These additions and modifications are my sole work for prog 1266
 #include "SceneNode.h"
 #include "CommandQueue.h"
 #include "Plane.h"
-#include "SoundPlayer.h"
 
 #include <vector>
 #include <array>
@@ -32,16 +31,14 @@ namespace GEX
 	{
 	public:
 
-		explicit		World(sf::RenderWindow& window, SoundPlayer& soundPlayer);
+		explicit		World(sf::RenderWindow& window);
 						~World();
 		World&			operator=(const World&) = delete;
 
 		void			update(sf::Time deltaTime);
 
-		void			updateSounds();
-
 		void			draw();
-		Cat*			getPlayer() { return _player; }
+		Plane*			getPlayer() { return _player; }
 		CommandQueue&	getCommandQueue();
 
 		bool			hasAlivePlayer() const;
@@ -51,11 +48,11 @@ namespace GEX
 
 		struct SpawnPoint
 		{
-			SpawnPoint(Cat::Type type, float _x, float _y) :
+			SpawnPoint(Plane::Type type, float _x, float _y) :
 				type(type),
 				x(_x),
 				y(_y) {}
-			Cat::Type type;
+			Plane::Type type;
 			float		x;
 			float		y;
 		};
@@ -69,30 +66,37 @@ namespace GEX
 
 		void			adaptPlayerPostition();
 
+		void			spawnEnemies();
+		void			addEnemies();
+		void			addEnemy(Plane::Type type, float relX, float relY);
+		void			addEnemy(SpawnPoint point);
+
 		void			handleCollisions();
+		void			destroyEnemiesOutsideView();
 
 	private:
 
 		enum _Layers
 		{
 			Background,
-			FinishLine,
 			Ground,
+			Road,
+			River,
 			LayerCount
-			
 		};
 
 		sf::RenderWindow&					_window;
 		sf::View							_worldView;
 		SceneNode							_sceneGraph;
 
-		SoundPlayer&						_soundPlayer;
-
 		std::array<SceneNode*, LayerCount>	_sceneLayers;
 		CommandQueue						_queue;
 		sf::FloatRect						_worldBounds;
 		sf::Vector2f						_spawnPosition;
 		float								_scrollSpeed;
-		Cat*								_player;
+		Plane*								_player;
+		std::vector<SpawnPoint>				_enemySpawnPoints;
+
+		std::vector<Plane*>					_activeEnemies;
 	};
 }

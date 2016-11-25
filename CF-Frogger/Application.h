@@ -32,7 +32,7 @@ namespace GEX
 		sf::RenderWindow        _window;
 		PlayerControl           _player;
 		MusicPlayer				_music;
-		SoundPlayer				_soundPlayer;
+		SoundPlayer				_sounds;
 
 		StateStack              _stateStack;
 
