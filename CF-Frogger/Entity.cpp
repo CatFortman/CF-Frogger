@@ -3,10 +3,10 @@
 
 namespace GEX
 {
-	Entity::Entity(int hitPoints) :
+	Entity::Entity(int hitpoints) :
 		_velocity(),
 		_angularVelocity(),
-		_hitPoints(hitPoints),
+		_hitPoints(hitpoints),
 		_sprite()
 	{
 	}

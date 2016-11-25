@@ -7,7 +7,7 @@ namespace GEX
 	class Entity : public SceneNode
 	{
 	public:
-		Entity(int hitPoints = 20);
+		Entity(int hitpoints = 100);
 		virtual ~Entity();
 
 		void			setVelocity(sf::Vector2f velocity);

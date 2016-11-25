@@ -30,15 +30,15 @@ namespace GEX
 	private:
 		void					drawCurrent(sf::RenderTarget & target, sf::RenderStates state) const;
 		void					updateCurrent(sf::Time dt, CommandQueue& commands);
-		void					updateTexts();
 		void					movementUpdate(sf::Time dt);
+		void					updateTexts();
 
 
 	private:
 
+		TextNode*				_healthDisplay;
 		Type					_type;
 		sf::Sprite				_sprite;
-		TextNode*				_healthDisplay;
 		int						_directionIndex;
 		float					_travelDistance;
 

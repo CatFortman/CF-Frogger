@@ -17,7 +17,7 @@ namespace GEX
 
 	Frog::Frog(Type type) :
 		_type(type),
-		//_sprite(TextureHolder::getInstance().get(table.at(type).texture), table.at(type).textureRect),
+		_sprite(TextureHolder::getInstance().get(table.at(type).texture), table.at(type).textureRect),
 		_directionIndex(0),
 
 		_isMarkedForRemoval(false)
@@ -92,11 +92,10 @@ namespace GEX
 
 	void Frog::updateTexts()
 	{
-		_healthDisplay->setText(std::to_string(getHitPoints()) + "HP");
+		/*_healthDisplay->setText(std::to_string(getHitPoints()) + "HP");
 		_healthDisplay->setPosition(0.f, 50.f);
-		_healthDisplay->setRotation(-getRotation());
+		_healthDisplay->setRotation(-getRotation());*/
 	}
-
 
 	bool Frog::isAllied() const
 	{

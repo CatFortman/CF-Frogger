@@ -53,7 +53,7 @@ namespace GEX
 		_sceneGraph(),
 		_sceneLayers(),
 		_worldBounds(0.f, 0.f, _worldView.getSize().x, _worldView.getSize().y),
-		_spawnPosition(_worldView.getSize().x / 2.f, _worldBounds.height - (_worldView.getSize().y / 2)),
+		_spawnPosition(_worldView.getSize().x / 2.f, _worldBounds.height - 20 ),
 		_queue(),
 		_player(nullptr)
 	{
@@ -222,7 +222,7 @@ namespace GEX
 		std::unique_ptr<Frog> Frog(new Frog(Frog::Type::Frogger));
 		_player = Frog.get();
 		_player->setPosition(_spawnPosition);
-		_sceneLayers[Ground]->attatchChild(std::move(Frog));
+		_sceneLayers[Background]->attatchChild(std::move(Frog));
 
 		/*std::unique_ptr<SpriteNode> _background2(new SpriteNode(texture2, textureRect));
 		_background2->setPosition(_worldBounds.left, _worldBounds.top);
