@@ -1,3 +1,16 @@
-﻿  World.cpp
+﻿  Entity.cpp
+  Generating Code...
+  Compiling...
+  plane.cpp
+  World.cpp
+  Source.cpp
+  PlayerControl.cpp
+  ParticleNode.cpp
+  GameState.cpp
+  DataTables.cpp
+  Application.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  Emmitter.cpp
   CF-Frogger.vcxproj -> C:\Users\bunny\Desktop\Classes\FirstTerm\Game Dev C++\CF-Frogger\Debug\CF-Frogger.exe
   CF-Frogger.vcxproj -> C:\Users\bunny\Desktop\Classes\FirstTerm\Game Dev C++\CF-Frogger\Debug\CF-Frogger.pdb (Partial PDB)

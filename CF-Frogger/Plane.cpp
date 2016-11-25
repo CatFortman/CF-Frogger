@@ -17,7 +17,7 @@ namespace GEX
 
 	Frog::Frog(Type type) :
 		_type(type),
-		//_sprite(TextureHolder::getInstance().get(table.at(type).texture), table.at(type).textureRect),
+		_sprite(TextureHolder::getInstance().get(table.at(type).texture), table.at(type).textureRect),
 		_directionIndex(0),
 
 		_isMarkedForRemoval(false)

@@ -222,7 +222,7 @@ namespace GEX
 		std::unique_ptr<Frog> Frog(new Frog(Frog::Type::Frogger));
 		_player = Frog.get();
 		_player->setPosition(_spawnPosition);
-		_sceneLayers[Ground]->attatchChild(std::move(Frog));
+		_sceneLayers[Background]->attatchChild(std::move(Frog));
 
 		/*std::unique_ptr<SpriteNode> _background2(new SpriteNode(texture2, textureRect));
 		_background2->setPosition(_worldBounds.left, _worldBounds.top);
