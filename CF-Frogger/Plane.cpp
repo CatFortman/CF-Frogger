@@ -92,11 +92,10 @@ namespace GEX
 
 	void Frog::updateTexts()
 	{
-		_healthDisplay->setText(std::to_string(getHitPoints()) + "HP");
+		/*_healthDisplay->setText(std::to_string(getHitPoints()) + "HP");
 		_healthDisplay->setPosition(0.f, 50.f);
-		_healthDisplay->setRotation(-getRotation());
+		_healthDisplay->setRotation(-getRotation());*/
 	}
-
 
 	bool Frog::isAllied() const
 	{

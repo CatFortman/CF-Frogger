@@ -33,7 +33,7 @@ namespace GEX
 
 		data[Frog::Type::Frogger].hitPoints = 100;
 		data[Frog::Type::Frogger].texture = TextureID::Frog;
-		data[Frog::Type::Frogger].textureRect = sf::IntRect(3, 8, 33, 23);
+		data[Frog::Type::Frogger].textureRect = sf::IntRect(3, 2, 25, 25);
 
 		return data;
 	}
