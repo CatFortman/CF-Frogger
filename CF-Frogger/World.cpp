@@ -204,7 +204,6 @@ namespace GEX
 		//background
 		sf::Texture& texture = TextureHolder::getInstance().get(TextureID::Background);
 		sf::IntRect textureRect(_worldBounds);
-		//texture.setRepeated(true);
 
 		std::unique_ptr<SpriteNode> _background(new SpriteNode(texture, textureRect));
 		_background->setPosition(_worldBounds.left, _worldBounds.top);
@@ -218,11 +217,11 @@ namespace GEX
 		//std::unique_ptr<ParticleNode> fireNode(new ParticleNode(Particle::Type::propellant));
 		//_sceneLayers[Air]->attatchChild(std::move(fireNode));
 
-		// Aircraft
+		// Frogger
 		std::unique_ptr<Frog> Frog(new Frog(Frog::Type::Frogger));
 		_player = Frog.get();
 		_player->setPosition(_spawnPosition);
-		_sceneLayers[Background]->attatchChild(std::move(Frog));
+		_sceneLayers[Ground]->attatchChild(std::move(Frog));
 
 		/*std::unique_ptr<SpriteNode> _background2(new SpriteNode(texture2, textureRect));
 		_background2->setPosition(_worldBounds.left, _worldBounds.top);

@@ -35,6 +35,7 @@ namespace GEX
 		TextureHolder::getInstance().load(TextureID::Explosion, "Media/Textures/Explosion.png");
 		TextureHolder::getInstance().load(TextureID::Background, "Media/Textures/background.png");
 		TextureHolder::getInstance().load(TextureID::Frog, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::FrogLives, "Media/Textures/FroggerAtlas.png");
 
 		_statsText.setFont(FontHolder::getInstance().get(FontID::Main));
 		_statsText.setPosition(5.f, 5.f);
