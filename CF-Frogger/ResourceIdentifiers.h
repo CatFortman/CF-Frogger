@@ -22,7 +22,8 @@ namespace GEX
 		ButtonPressed,
 		Particle,
 		Explosion,
-		FrogLives
+		FrogLives,
+		FrogJump
 	};
 
 	enum class SoundEffectID {

@@ -1,3 +1,29 @@
-﻿  PlayerControl.cpp
+﻿  Application.cpp
+  Generating Code...
+  Compiling...
+  plane.cpp
+  World.cpp
+  TitleState.cpp
+  TextureHolder.cpp
+  TextNode.cpp
+  StateStack.cpp
+  State.cpp
+  Source.cpp
+  SoundPlayer.cpp
+  SoundNode.cpp
+  SoundBufferHolder.cpp
+  PauseState.cpp
+  ParticleNode.cpp
+  MenuState.cpp
+  Label.cpp
+  GexState.cpp
+  GameOver.cpp
+  FontHolder.cpp
+  Emmitter.cpp
+  DataTables.cpp
+  Generating Code...
+  Compiling...
+  Button.cpp
+  Generating Code...
   CF-Frogger.vcxproj -> C:\Users\bunny\Desktop\Classes\FirstTerm\Game Dev C++\CF-Frogger\Debug\CF-Frogger.exe
   CF-Frogger.vcxproj -> C:\Users\bunny\Desktop\Classes\FirstTerm\Game Dev C++\CF-Frogger\Debug\CF-Frogger.pdb (Partial PDB)

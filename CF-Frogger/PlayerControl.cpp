@@ -6,11 +6,13 @@ namespace GEX
 {
 	struct FrogMover {
 	
-		FrogMover(float vx, float vy) : pixels(vx, vy) {}
+		FrogMover(float vx, float vy, float degrees) : pixels(vx, vy), rotation(degrees) {}
 		void operator() (Frog& Frog, sf::Time) const {
 			Frog.movePlayer(pixels);
+			Frog.setRotation(rotation);
 		}
 
+		float rotation;
 		sf::Vector2f pixels;
 	};
 
@@ -68,13 +70,12 @@ namespace GEX
 
 	void PlayerControl::initalizeActionBindings()
 	{
-		const float playerSpeed = 80;
-		const float rotation = .30f;
+		const float playerSpeed = 10;
 
-		_actionBindings[Action::moveLeft].action		= derivedAction<Frog>(FrogMover(-playerSpeed, 0));
-		_actionBindings[Action::moveRight].action       = derivedAction<Frog>(FrogMover(playerSpeed, 0));
-		_actionBindings[Action::moveUp].action			= derivedAction<Frog>(FrogMover(0, -playerSpeed));
-		_actionBindings[Action::moveDown].action		= derivedAction<Frog>(FrogMover(0, playerSpeed));
+		_actionBindings[Action::moveLeft].action		= derivedAction<Frog>(FrogMover(-playerSpeed, 0, -90));
+		_actionBindings[Action::moveRight].action       = derivedAction<Frog>(FrogMover(playerSpeed, 0, 90));
+		_actionBindings[Action::moveUp].action			= derivedAction<Frog>(FrogMover(0, -playerSpeed, 0));
+		_actionBindings[Action::moveDown].action		= derivedAction<Frog>(FrogMover(0, playerSpeed, 180));
 		
 		for (auto& pair : _actionBindings)
 			pair.second.category = Category::playerCharacter;

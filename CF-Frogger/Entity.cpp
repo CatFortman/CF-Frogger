@@ -83,8 +83,7 @@ namespace GEX
 	{
 		if (_move)
 		{
-			move(_pixels * dt.asSeconds());
-			rotate(_angularVelocity * dt.asSeconds());
+			setPosition(getPosition() + _pixels);
 			_move = false;
 		}
 	}
