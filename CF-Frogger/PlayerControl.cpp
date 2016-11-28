@@ -6,12 +6,12 @@ namespace GEX
 {
 	struct FrogMover {
 	
-		FrogMover(float pixels) : pixels(pixels){}
+		FrogMover(float vx, float vy) : pixels(vx, vy) {}
 		void operator() (Frog& Frog, sf::Time) const {
-		//	Frog.move(pixels);
+			Frog.movePlayer(pixels);
 		}
 
-		float pixels;
+		sf::Vector2f pixels;
 	};
 
 	PlayerControl::PlayerControl() :
@@ -37,7 +37,6 @@ namespace GEX
 
 	void PlayerControl::handleRealTimeInput(CommandQueue& commands)
 	{
-
 		for (auto pair : _keyBindings)
 		{
 			if (sf::Keyboard::isKeyPressed(pair.first) && isRealTimeAction(pair.second))
@@ -69,16 +68,16 @@ namespace GEX
 
 	void PlayerControl::initalizeActionBindings()
 	{
-		const float playerSpeed = 200.f;
+		const float playerSpeed = 80;
 		const float rotation = .30f;
 
-		_actionBindings[Action::moveLeft].action		= derivedAction<Frog>(FrogMover(40));
-		_actionBindings[Action::moveRight].action       = derivedAction<Frog>(FrogMover(40));
-		_actionBindings[Action::moveUp].action			= derivedAction<Frog>(FrogMover(40));
-		_actionBindings[Action::moveDown].action		= derivedAction<Frog>(FrogMover(40));
+		_actionBindings[Action::moveLeft].action		= derivedAction<Frog>(FrogMover(-playerSpeed, 0));
+		_actionBindings[Action::moveRight].action       = derivedAction<Frog>(FrogMover(playerSpeed, 0));
+		_actionBindings[Action::moveUp].action			= derivedAction<Frog>(FrogMover(0, -playerSpeed));
+		_actionBindings[Action::moveDown].action		= derivedAction<Frog>(FrogMover(0, playerSpeed));
 		
 		for (auto& pair : _actionBindings)
-			pair.second.category = Category::player;
+			pair.second.category = Category::playerCharacter;
 	}
 
 	void PlayerControl::setMissionStatus(MissionStatus status)

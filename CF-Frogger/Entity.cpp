@@ -23,8 +23,30 @@ namespace GEX
 		_velocity = sf::Vector2f(vx, vy);
 	}
 
-	void Entity::movePlayer()
+	void Entity::setPixels(sf::Vector2f pixels)
 	{
+		_pixels = pixels;
+	}
+
+	void Entity::setPixels(float vx, float vy)
+	{
+		_pixels = sf::Vector2f(vx, vy);
+	}
+
+	sf::Vector2f Entity::getPixels() const
+	{
+		return _pixels;
+	}
+
+	void Entity::movePlayer(sf::Vector2f pixels)
+	{
+		_move = true;
+		setPixels(pixels);
+	}
+
+	void Entity::movePlayer(float vx, float vy)
+	{
+		setPixels(sf::Vector2f(vx, vy));
 	}
 
 	sf::Vector2f Entity::getVelocity() const
@@ -34,7 +56,6 @@ namespace GEX
 
 	void Entity::accelerate(sf::Vector2f velocity)
 	{
-
 		setVelocity(velocity + getVelocity());
 	}
 
@@ -60,8 +81,12 @@ namespace GEX
 
 	void Entity::updateCurrent(sf::Time dt, CommandQueue& commands)
 	{
-		move(_velocity * dt.asSeconds());
-		rotate(_angularVelocity * dt.asSeconds());
+		if (_move)
+		{
+			move(_pixels * dt.asSeconds());
+			rotate(_angularVelocity * dt.asSeconds());
+			_move = false;
+		}
 	}
 
 	int Entity::getHitPoints() const

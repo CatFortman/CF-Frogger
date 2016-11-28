@@ -45,15 +45,7 @@ namespace GEX
 
 	unsigned int Frog::getCategory() const
 	{
-		switch (_type)
-		{
-		case GEX::Frog::Type::Frogger:
-		default:
-			assert(0); //missing type
-			break;
-
-		}
-		return Category::none;
+		return Category::playerCharacter;
 	}
 
 	sf::FloatRect Frog::getBoundingRect() const
@@ -68,7 +60,6 @@ namespace GEX
 
 	void Frog::movementUpdate(sf::Time dt)
 	{
-		const std::vector<Direction>& directions = table.at(_type).directions;
 	}
 
 	void Frog::updateCurrent(sf::Time dt, CommandQueue& commands)

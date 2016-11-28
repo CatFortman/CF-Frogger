@@ -41,6 +41,7 @@ namespace GEX
 		TextNode*				_healthDisplay;
 		Type					_type;
 		sf::Sprite				_sprite;
+
 		int						_directionIndex;
 		float					_travelDistance;
 
