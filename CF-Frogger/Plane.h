@@ -28,11 +28,13 @@ namespace GEX
 		bool					isMarkedForRemoval() const;
 
 	private:
+
+
+
 		void					drawCurrent(sf::RenderTarget & target, sf::RenderStates state) const;
 		void					updateCurrent(sf::Time dt, CommandQueue& commands);
 		void					movementUpdate(sf::Time dt);
 		void					updateTexts();
-
 
 	private:
 

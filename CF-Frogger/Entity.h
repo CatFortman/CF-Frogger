@@ -14,6 +14,8 @@ namespace GEX
 		void			setVelocity(float vx, float vy);
 		sf::Vector2f	getVelocity() const;
 
+		void            movePlayer();
+
 		void			accelerate(sf::Vector2f velocity);
 		void			accelerate(float vx, float vy);
 
@@ -38,6 +40,7 @@ namespace GEX
 	private:
 		sf::Sprite		_sprite;
 
+		float           _pixels;
 		float			_angularVelocity;
 		sf::Vector2f	_velocity;
 		int				_hitPoints;

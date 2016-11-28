@@ -23,6 +23,10 @@ namespace GEX
 		_velocity = sf::Vector2f(vx, vy);
 	}
 
+	void Entity::movePlayer()
+	{
+	}
+
 	sf::Vector2f Entity::getVelocity() const
 	{
 		return _velocity;
