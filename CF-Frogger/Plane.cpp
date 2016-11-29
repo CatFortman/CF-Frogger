@@ -19,21 +19,14 @@ namespace GEX
 		_type(type),
 		_sprite(TextureHolder::getInstance().get(table.at(type).texture), table.at(type).textureRect),
 		_directionIndex(0),
-
+		_jumping(false),
+		_jumpTimer(0),
 		_isMarkedForRemoval(false)
 	{
 		// set up the animation
-
 		centerOrigin(_sprite);
-		//
-		// build fire and launch commands
-		//
-		
-		//
-		// build mini-HUD for aircraft
-		//
 
-		// TextureHolder::getInstance().load(TextureID::AIRFrog, "../media/Textures/Froggers.png");
+		// TextureHolder::getInstance().load(TextureID::AIRFrog, "../media/Textures/Idles.png");
 		sf::FloatRect bounds = _sprite.getLocalBounds();
 		_sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
 
@@ -45,15 +38,7 @@ namespace GEX
 
 	unsigned int Frog::getCategory() const
 	{
-		switch (_type)
-		{
-		case GEX::Frog::Type::Frogger:
-		default:
-			assert(0); //missing type
-			break;
-
-		}
-		return Category::none;
+		return Category::playerCharacter;
 	}
 
 	sf::FloatRect Frog::getBoundingRect() const
@@ -68,22 +53,18 @@ namespace GEX
 
 	void Frog::movementUpdate(sf::Time dt)
 	{
-		const std::vector<Direction>& directions = table.at(_type).directions;
 	}
 
 	void Frog::updateCurrent(sf::Time dt, CommandQueue& commands)
 	{
-		// normalize speed
-		// needed when travelling diagonl
-		sf::Vector2f velo = getVelocity();
-		if (velo.x != 0.f && velo.y != 0.f)
-			setVelocity(velo / std::sqrt(2.f));
-
+		// check if Idle died
 		if (isDestroyed())
 		{
 			return;
 		}
 
+		checkIfJumping();
+		_jumpTimer++;
 		movementUpdate(dt);
 		Entity::updateCurrent(dt, commands);
 
@@ -97,13 +78,29 @@ namespace GEX
 		_healthDisplay->setRotation(-getRotation());*/
 	}
 
-	bool Frog::isAllied() const
-	{
-		return _type == Type::Frogger;
-	}
-
 	bool Frog::isMarkedForRemoval() const
 	{
 		return isDestroyed();
+	}
+
+	void Frog::isJumping(bool jumping)
+	{
+		_jumping = jumping;
+	}
+
+	void Frog::checkIfJumping()
+	{
+		if (_jumpTimer == 15)
+		{
+			_jumpTimer = 0;
+			_sprite.setTexture(TextureHolder::getInstance().get(table.at(Frog::Type::Idle).texture));
+			_sprite.setTextureRect(table.at(Frog::Type::Idle).textureRect);
+		}
+		if (_jumping)
+		{
+			_sprite.setTexture(TextureHolder::getInstance().get(table.at(Frog::Type::Jumping).texture));
+			_sprite.setTextureRect(table.at(Frog::Type::Jumping).textureRect);
+			isJumping(false);
+		}
 	}
 }

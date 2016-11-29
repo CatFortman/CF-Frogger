@@ -217,8 +217,8 @@ namespace GEX
 		//std::unique_ptr<ParticleNode> fireNode(new ParticleNode(Particle::Type::propellant));
 		//_sceneLayers[Air]->attatchChild(std::move(fireNode));
 
-		// Frogger
-		std::unique_ptr<Frog> Frog(new Frog(Frog::Type::Frogger));
+		// Idle
+		std::unique_ptr<Frog> Frog(new Frog(Frog::Type::Idle));
 		_player = Frog.get();
 		_player->setPosition(_spawnPosition);
 		_sceneLayers[Ground]->attatchChild(std::move(Frog));
@@ -228,15 +228,15 @@ namespace GEX
 		sf::IntRect textureRect2(395,100,39,40);
 
 		std::unique_ptr<SpriteNode> _frogLife1(new SpriteNode(texture2, textureRect2));
-		_frogLife1->setPosition(_worldView.getSize().x / 5.f, _worldBounds.height - 50);
+		_frogLife1->setPosition(_worldView.getSize().x - 50, _worldBounds.height - 590);
 		_sceneLayers[Background]->attatchChild(std::move(_frogLife1));
 
 		std::unique_ptr<SpriteNode> _frogLife2(new SpriteNode(texture2, textureRect2));
-		_frogLife2->setPosition(_worldView.getSize().x / 8.f, _worldBounds.height - 50);
+		_frogLife2->setPosition(_worldView.getSize().x - 90, _worldBounds.height - 590);
 		_sceneLayers[Background]->attatchChild(std::move(_frogLife2));
 
 		std::unique_ptr<SpriteNode> _frogLife3(new SpriteNode(texture2, textureRect2));
-		_frogLife3->setPosition(_worldView.getSize().x / 20.f, _worldBounds.height - 50);
+		_frogLife3->setPosition(_worldView.getSize().x - 130, _worldBounds.height - 590);
 		_sceneLayers[Background]->attatchChild(std::move(_frogLife3));
 	}
 

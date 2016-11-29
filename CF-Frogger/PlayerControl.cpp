@@ -4,25 +4,17 @@
 
 namespace GEX 
 {
-	struct AircraftMover{
+	struct FrogMover {
 	
-		AircraftMover(float vx, float vy) : velocity(vx, vy){}
+		FrogMover(float vx, float vy, float degrees) : pixels(vx, vy), rotation(degrees) {}
 		void operator() (Frog& Frog, sf::Time) const {
-			Frog.accelerate(velocity);
-		}
-
-		sf::Vector2f velocity;
-	};
-
-	struct AircraftRotator {
-
-		AircraftRotator(float vSpeed) : rotation(vSpeed) {}
-		void operator() (Frog& Frog, sf::Time) const {
-			Frog.setRotation(Frog.getRotation() + rotation);
+			Frog.movePlayer(pixels);
+			Frog.setRotation(rotation);
+			Frog.isJumping(true);
 		}
 
 		float rotation;
-
+		sf::Vector2f pixels;
 	};
 
 	PlayerControl::PlayerControl() :
@@ -48,13 +40,13 @@ namespace GEX
 
 	void PlayerControl::handleRealTimeInput(CommandQueue& commands)
 	{
-
 		for (auto pair : _keyBindings)
 		{
 			if (sf::Keyboard::isKeyPressed(pair.first) && isRealTimeAction(pair.second))
 				commands.push(_actionBindings[pair.second]);
 		}
 	}
+
 	bool PlayerControl::isRealTimeAction(Action action)
 	{
 		switch (action)
@@ -80,16 +72,15 @@ namespace GEX
 
 	void PlayerControl::initalizeActionBindings()
 	{
-		const float playerSpeed = 200.f;
-		const float rotation = .30f;
+		const float playerSpeed = 10;
 
-		_actionBindings[Action::moveLeft].action		= derivedAction<Frog>(AircraftMover(-playerSpeed, 0));
-		_actionBindings[Action::moveRight].action       = derivedAction<Frog>(AircraftMover(playerSpeed, 0));
-		_actionBindings[Action::moveUp].action			= derivedAction<Frog>(AircraftMover(0, -playerSpeed));
-		_actionBindings[Action::moveDown].action		= derivedAction<Frog>(AircraftMover(0, playerSpeed));
+		_actionBindings[Action::moveLeft].action		= derivedAction<Frog>(FrogMover(-playerSpeed, 0, -90));
+		_actionBindings[Action::moveRight].action       = derivedAction<Frog>(FrogMover(playerSpeed, 0, 90));
+		_actionBindings[Action::moveUp].action			= derivedAction<Frog>(FrogMover(0, -playerSpeed, 0));
+		_actionBindings[Action::moveDown].action		= derivedAction<Frog>(FrogMover(0, playerSpeed, 180));
 		
 		for (auto& pair : _actionBindings)
-			pair.second.category = Category::player;
+			pair.second.category = Category::playerCharacter;
 	}
 
 	void PlayerControl::setMissionStatus(MissionStatus status)

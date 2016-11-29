@@ -25,7 +25,7 @@ namespace GEX
 
 		FontHolder::getInstance().load(FontID::Main, "Media/Player.ttf");
 		TextureHolder::getInstance().load(TextureID::TitleScreen, "Media/Textures/FroggerTitle.png");
-		TextureHolder::getInstance().load(TextureID::MenuScreen, "Media/Textures/frogger.png");
+		TextureHolder::getInstance().load(TextureID::MenuScreen, "Media/Textures/Frogger.png");
 		TextureHolder::getInstance().load(TextureID::Face, "Media/Textures/face.png");
 		TextureHolder::getInstance().load(TextureID::RedQuit, "Media/Textures/quitRed.png");
 		TextureHolder::getInstance().load(TextureID::GreenQuit, "Media/Textures/quitGreen.png");
@@ -35,6 +35,7 @@ namespace GEX
 		TextureHolder::getInstance().load(TextureID::Explosion, "Media/Textures/Explosion.png");
 		TextureHolder::getInstance().load(TextureID::Background, "Media/Textures/background.png");
 		TextureHolder::getInstance().load(TextureID::Frog, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::FrogJump, "Media/Textures/FroggerAtlas.png");
 		TextureHolder::getInstance().load(TextureID::FrogLives, "Media/Textures/FroggerAtlas.png");
 
 		_statsText.setFont(FontHolder::getInstance().get(FontID::Main));

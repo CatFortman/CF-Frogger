@@ -12,10 +12,10 @@ namespace GEX
 	class Frog : public Entity
 	{
 	public:
-		enum class  Type{ Frogger};
+		enum class  Type{ Idle, Jumping, Dying};
 		
 	public:
-								Frog(Type type = Type::Frogger);
+								Frog(Type type = Type::Idle);
 								//Frog(Frogs type, const TextureHolder& textures);
 
 		virtual					~Frog() {};
@@ -24,8 +24,10 @@ namespace GEX
 
 		sf::FloatRect			getBoundingRect() const override;
 
-		bool					isAllied() const;
 		bool					isMarkedForRemoval() const;
+		
+		void					isJumping(bool jumping);
+		void					checkIfJumping();
 
 	private:
 		void					drawCurrent(sf::RenderTarget & target, sf::RenderStates state) const;
@@ -33,12 +35,15 @@ namespace GEX
 		void					movementUpdate(sf::Time dt);
 		void					updateTexts();
 
-
 	private:
 
 		TextNode*				_healthDisplay;
 		Type					_type;
 		sf::Sprite				_sprite;
+
+		bool					_jumping;
+		int						_jumpTimer;
+
 		int						_directionIndex;
 		float					_travelDistance;
 
