@@ -291,7 +291,7 @@
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "FroggerAtlas.png",
+	"image": "IdleAtlas.png",
 	"format": "RGBA8888",
 	"size": {"w":468,"h":141},
 	"scale": "1",

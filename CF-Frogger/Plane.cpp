@@ -26,7 +26,7 @@ namespace GEX
 		// set up the animation
 		centerOrigin(_sprite);
 
-		// TextureHolder::getInstance().load(TextureID::AIRFrog, "../media/Textures/Froggers.png");
+		// TextureHolder::getInstance().load(TextureID::AIRFrog, "../media/Textures/Idles.png");
 		sf::FloatRect bounds = _sprite.getLocalBounds();
 		_sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
 
@@ -57,26 +57,15 @@ namespace GEX
 
 	void Frog::updateCurrent(sf::Time dt, CommandQueue& commands)
 	{
-		// check if frogger died
+		// check if Idle died
 		if (isDestroyed())
 		{
 			return;
 		}
 
+		checkIfJumping();
 		_jumpTimer++;
-		if (_jumpTimer == 15)
-		{
-			_jumpTimer = 0;
-			_sprite.setTexture(TextureHolder::getInstance().get(table.at(Frog::Type::Frogger).texture));
-			_sprite.setTextureRect(table.at(Frog::Type::Frogger).textureRect);
-		}
 		movementUpdate(dt);
-		if (_jumping)
-		{
-			_sprite.setTexture(TextureHolder::getInstance().get(table.at(Frog::Type::Jumping).texture));
-			_sprite.setTextureRect(table.at(Frog::Type::Jumping).textureRect);
-			isJumping(false);
-		}
 		Entity::updateCurrent(dt, commands);
 
 		updateTexts();
@@ -89,11 +78,6 @@ namespace GEX
 		_healthDisplay->setRotation(-getRotation());*/
 	}
 
-	bool Frog::isAllied() const
-	{
-		return _type == Type::Frogger;
-	}
-
 	bool Frog::isMarkedForRemoval() const
 	{
 		return isDestroyed();
@@ -102,5 +86,21 @@ namespace GEX
 	void Frog::isJumping(bool jumping)
 	{
 		_jumping = jumping;
+	}
+
+	void Frog::checkIfJumping()
+	{
+		if (_jumpTimer == 15)
+		{
+			_jumpTimer = 0;
+			_sprite.setTexture(TextureHolder::getInstance().get(table.at(Frog::Type::Idle).texture));
+			_sprite.setTextureRect(table.at(Frog::Type::Idle).textureRect);
+		}
+		if (_jumping)
+		{
+			_sprite.setTexture(TextureHolder::getInstance().get(table.at(Frog::Type::Jumping).texture));
+			_sprite.setTextureRect(table.at(Frog::Type::Jumping).textureRect);
+			isJumping(false);
+		}
 	}
 }
