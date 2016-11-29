@@ -254,5 +254,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Zombie5.json" />
+    <None Include="FroggerAtlas.json" />
   </ItemGroup>
 </Project>

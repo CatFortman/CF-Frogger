@@ -101,6 +101,7 @@
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="FroggerAtlas.json" />
     <None Include="Zombie5.json" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

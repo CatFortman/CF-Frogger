@@ -19,19 +19,12 @@ namespace GEX
 		_type(type),
 		_sprite(TextureHolder::getInstance().get(table.at(type).texture), table.at(type).textureRect),
 		_directionIndex(0),
-
+		_jumping(false),
+		_jumpTimer(0),
 		_isMarkedForRemoval(false)
 	{
 		// set up the animation
-
 		centerOrigin(_sprite);
-		//
-		// build fire and launch commands
-		//
-		
-		//
-		// build mini-HUD for aircraft
-		//
 
 		// TextureHolder::getInstance().load(TextureID::AIRFrog, "../media/Textures/Froggers.png");
 		sf::FloatRect bounds = _sprite.getLocalBounds();
@@ -64,18 +57,26 @@ namespace GEX
 
 	void Frog::updateCurrent(sf::Time dt, CommandQueue& commands)
 	{
-		// normalize speed
-		// needed when travelling diagonl
-		sf::Vector2f velo = getVelocity();
-		if (velo.x != 0.f && velo.y != 0.f)
-			setVelocity(velo / std::sqrt(2.f));
-
+		// check if frogger died
 		if (isDestroyed())
 		{
 			return;
 		}
 
+		_jumpTimer++;
+		if (_jumpTimer == 15)
+		{
+			_jumpTimer = 0;
+			_sprite.setTexture(TextureHolder::getInstance().get(table.at(Frog::Type::Frogger).texture));
+			_sprite.setTextureRect(table.at(Frog::Type::Frogger).textureRect);
+		}
 		movementUpdate(dt);
+		if (_jumping)
+		{
+			_sprite.setTexture(TextureHolder::getInstance().get(table.at(Frog::Type::Jumping).texture));
+			_sprite.setTextureRect(table.at(Frog::Type::Jumping).textureRect);
+			isJumping(false);
+		}
 		Entity::updateCurrent(dt, commands);
 
 		updateTexts();
@@ -96,5 +97,10 @@ namespace GEX
 	bool Frog::isMarkedForRemoval() const
 	{
 		return isDestroyed();
+	}
+
+	void Frog::isJumping(bool jumping)
+	{
+		_jumping = jumping;
 	}
 }

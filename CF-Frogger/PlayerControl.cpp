@@ -10,6 +10,7 @@ namespace GEX
 		void operator() (Frog& Frog, sf::Time) const {
 			Frog.movePlayer(pixels);
 			Frog.setRotation(rotation);
+			Frog.isJumping(true);
 		}
 
 		float rotation;
@@ -45,6 +46,7 @@ namespace GEX
 				commands.push(_actionBindings[pair.second]);
 		}
 	}
+
 	bool PlayerControl::isRealTimeAction(Action action)
 	{
 		switch (action)

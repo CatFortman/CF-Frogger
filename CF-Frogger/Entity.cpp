@@ -1,8 +1,12 @@
 #include "Entity.h"
-
+#include "DataTables.h"
+#include "TextureHolder.h"
+#include "ResourceIdentifiers.h"
 
 namespace GEX
 {
+	const std::map<Frog::Type, FrogData> table = initializeFrogData();
+
 	Entity::Entity(int hitpoints) :
 		_velocity(),
 		_angularVelocity(),
@@ -14,10 +18,12 @@ namespace GEX
 	Entity::~Entity()
 	{
 	}
+
 	void Entity::setVelocity(sf::Vector2f velocity)
 	{
 		_velocity = velocity;
 	}
+
 	void Entity::setVelocity(float vx, float vy)
 	{
 		_velocity = sf::Vector2f(vx, vy);
@@ -40,7 +46,7 @@ namespace GEX
 
 	void Entity::movePlayer(sf::Vector2f pixels)
 	{
-		_move = true;
+		_frogMove = true;
 		setPixels(pixels);
 	}
 
@@ -81,10 +87,10 @@ namespace GEX
 
 	void Entity::updateCurrent(sf::Time dt, CommandQueue& commands)
 	{
-		if (_move)
+		if (_frogMove)
 		{
 			setPosition(getPosition() + _pixels);
-			_move = false;
+			_frogMove = false;
 		}
 	}
 
