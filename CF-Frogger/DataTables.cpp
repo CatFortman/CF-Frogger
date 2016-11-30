@@ -61,8 +61,9 @@ namespace GEX
 		std::map<Vehicle::Type, VehicleData> data;
 
 		data[Vehicle::Type::Car].texture = TextureID::Car;
-		data[Vehicle::Type::Car].directions.push_back(Direction(+50.f, 70.f));
+		data[Vehicle::Type::Car].directions.push_back(Direction(-50.f, 0.f));
 		data[Vehicle::Type::Car].textureRect = sf::IntRect( 1, 62, 35, 29);
+		data[Vehicle::Type::Car].speed = 70.f;
 
 		return data;
 	}

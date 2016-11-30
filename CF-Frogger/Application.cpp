@@ -34,9 +34,10 @@ namespace GEX
 		TextureHolder::getInstance().load(TextureID::Particle, "Media/Textures/particle.png");
 		TextureHolder::getInstance().load(TextureID::Explosion, "Media/Textures/Explosion.png");
 		TextureHolder::getInstance().load(TextureID::Background, "Media/Textures/background.jpg");
-		TextureHolder::getInstance().load(TextureID::Frog, "Media/Textures/FroggerAtlas.jpg");
-		TextureHolder::getInstance().load(TextureID::FrogJump, "Media/Textures/FroggerAtlas.jpg");
-		TextureHolder::getInstance().load(TextureID::FrogLives, "Media/Textures/FroggerAtlas.jpg");
+		TextureHolder::getInstance().load(TextureID::Frog, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::FrogJump, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::FrogLives, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::Car, "Media/Textures/FroggerAtlas.png");
 
 		_statsText.setFont(FontHolder::getInstance().get(FontID::Main));
 		_statsText.setPosition(5.f, 5.f);

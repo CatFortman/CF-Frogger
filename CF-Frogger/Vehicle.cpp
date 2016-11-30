@@ -12,7 +12,7 @@ namespace GEX
 
 	TextureID toTextureID(Vehicle::Type type)
 	{
-		return TextureID::Frog;
+		return TextureID::Car;
 	}
 
 	Vehicle::Vehicle(Type type) :
@@ -31,37 +31,77 @@ namespace GEX
 
 	unsigned int Vehicle::getCategory() const
 	{
-		return Category::playerCharacter;
-	}
-
-	sf::FloatRect Vehicle::getBoundingRect() const
-	{
-		return getWorldTransform().transformRect(_sprite.getGlobalBounds());
-	}
-
-	void Vehicle::drawCurrent(sf::RenderTarget & target, sf::RenderStates state) const
-	{
-		target.draw(_sprite, state);
-	}
-
-	void Vehicle::movementUpdate(sf::Time dt)
-	{
-	}
-
-	void Vehicle::updateCurrent(sf::Time dt, CommandQueue& commands)
-	{
-		// check if Idle died
-		if (isDestroyed())
+		switch (_type)
 		{
-			return;
+		case GEX::Vehicle::Type::Car:
+			return Category::vehicle;
+			break;
+		case GEX::Vehicle::Type::RaceCarR:
+			return Category::vehicle;
+			break;
+		case GEX::Vehicle::Type::RaceCarL:
+			return Category::vehicle;
+			break;
+		case GEX::Vehicle::Type::Tractor:
+			return Category::vehicle;
+			break;
+		case GEX::Vehicle::Type::Truck:
+			return Category::vehicle;
+			break;
+		default:
+			assert(0); //missing type
+			break;
 		}
+		return Category::none;
+}
 
-		movementUpdate(dt);
-		Entity::updateCurrent(dt, commands);
-	}
+sf::FloatRect Vehicle::getBoundingRect() const
+{
+	return getWorldTransform().transformRect(_sprite.getGlobalBounds());
+}
 
-	bool Vehicle::isMarkedForRemoval() const
+void Vehicle::drawCurrent(sf::RenderTarget & target, sf::RenderStates state) const
+{
+	target.draw(_sprite, state);
+}
+
+float Vehicle::getMaxSpeed() const
+{
+	return table.at(_type).speed;
+}
+
+void Vehicle::movementUpdate(sf::Time dt)
+{
+	const std::vector<Direction>& directions = table.at(_type).directions;
+	if (!directions.empty())
 	{
-		return isDestroyed();
+		float distanceToTravel = directions.at(_directionIndex).distance;
+		if (_travelDistance > distanceToTravel)
+		{
+			_directionIndex = (_directionIndex + 1) % directions.size();
+			_travelDistance = 0;
+		}
+		_travelDistance += getMaxSpeed() * dt.asSeconds();
+		float dirAngle = directions.at(_directionIndex).angle + 90.f;
+		float vx = getMaxSpeed() * GEX::cos(dirAngle);
+		float vy = getMaxSpeed() * GEX::sin(dirAngle);
+		setVelocity(vx, vy);
 	}
+}
+
+void Vehicle::updateCurrent(sf::Time dt, CommandQueue& commands)
+{
+	if (isDestroyed())
+	{
+		return;
+	}
+
+	movementUpdate(dt);
+	Entity::updateCurrent(dt, commands);
+}
+
+bool Vehicle::isMarkedForRemoval() const
+{
+	return isDestroyed();
+}
 }

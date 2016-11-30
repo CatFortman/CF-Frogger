@@ -71,15 +71,6 @@ namespace GEX
 
 	void World::update(sf::Time deltaTime)
 	{
-		//_worldView.zoom(1.00001); //goes OUT slowly
-		//_worldView.rotate(0.001); //spins!
-
-		//background
-		//_worldView.move(0.f, _scrollSpeed * deltaTime.asSeconds()); // moves the view which moves the background moves and not the Frogs
-		//_player->setVelocity(0.f, 0.f);
-
-		//destroyEnemiesOutsideView(); // sets hp = 0 if outside of view
-
 		// run all the commands
 		while (!_queue.isEmpty())
 		{
@@ -108,9 +99,9 @@ namespace GEX
 		{
 			velocity.y *= -1;
 			_playerAircraft->setVelocity(velocity);
-		}
+		}*/;
 
-		spawnEnemies();*/
+		spawnEnemies();
 		//movement
 		_sceneGraph.update(deltaTime, getCommandQueue());
 		//adaptPlayerPostition();
@@ -162,10 +153,9 @@ namespace GEX
 		while (!_enemySpawnPoints.empty() && (_enemySpawnPoints.back().y > getBattlefieldBounds().top))
 		{
 			auto spawn = _enemySpawnPoints.back();
-			std::unique_ptr<Frog> enemy(new Frog(spawn.type));
+			std::unique_ptr<Vehicle> enemy(new Vehicle(spawn.type));
 			enemy->setPosition(spawn.x, spawn.y);
-			enemy->setRotation(180);
-			_sceneLayers[Ground]->attatchChild(std::move(enemy));
+			_sceneLayers[LaneNode]->attatchChild(std::move(enemy));
 			_enemySpawnPoints.pop_back();
 		}
 	}
@@ -173,11 +163,12 @@ namespace GEX
 	void World::addEnemies()
 	{
 		// add enemy spawn points
+		addEnemy(Vehicle::Type::Car, _worldView.getSize().x / 2.f, _worldBounds.height - 400);
 
 		std::sort(_enemySpawnPoints.begin(), _enemySpawnPoints.end(), [](SpawnPoint lhs, SpawnPoint rhs) {return lhs.y < rhs.y;	});
 	}
 
-	void World::addEnemy(Frog::Type type, float relX, float relY)
+	void World::addEnemy(Vehicle::Type type, float relX, float relY)
 	{
 		addEnemy(SpawnPoint(type, relX, relY));
 	}
@@ -192,7 +183,6 @@ namespace GEX
 	void World::buildScene()
 	{
 		//LAYER NODES FOR SCENE GRAPH
-
 		for (std::size_t i = 0; i < LayerCount; i++)
 		{
 			Category::type category = (i == Ground) ? Category::sceneGroundLayer : Category::none;
@@ -238,6 +228,9 @@ namespace GEX
 		std::unique_ptr<SpriteNode> _frogLife3(new SpriteNode(texture2, textureRect2));
 		_frogLife3->setPosition(_worldView.getSize().x - 130, _worldBounds.height - 590);
 		_sceneLayers[Background]->attatchChild(std::move(_frogLife3));
+
+		// add the enemies
+		addEnemies();
 	}
 
 	void World::handleCollisions()

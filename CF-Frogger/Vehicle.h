@@ -22,6 +22,8 @@ namespace GEX
 
 		unsigned int			getCategory() const override;
 
+		float					getMaxSpeed() const;
+
 		sf::FloatRect			getBoundingRect() const override;
 
 		bool					isMarkedForRemoval() const;

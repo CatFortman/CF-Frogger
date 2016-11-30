@@ -1,17 +1,9 @@
-﻿  Application.cpp
-  DataTables.cpp
-  Emmitter.cpp
-  Entity.cpp
-  FontHolder.cpp
-  ParticleNode.cpp
-  PauseState.cpp
-  plane.cpp
-  SoundBufferHolder.cpp
-  Vehicle.cpp
+﻿  Vehicle.cpp
+  World.cpp
   Generating code
-  274 of 3280 functions ( 8.4%) were compiled, the rest were copied from previous compilation.
-    215 functions were new in current compilation
-    133 functions had inline decision re-evaluated but remain unchanged
+  5 of 3418 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   CF-Frogger.vcxproj -> C:\Users\bunny\Desktop\Classes\FirstTerm\Game Dev C++\CF-Frogger\Release\CF-Frogger.exe
   CF-Frogger.vcxproj -> C:\Users\bunny\Desktop\Classes\FirstTerm\Game Dev C++\CF-Frogger\Release\CF-Frogger.pdb (Full PDB)

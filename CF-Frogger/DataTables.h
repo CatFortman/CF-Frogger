@@ -50,6 +50,7 @@ namespace GEX
 		TextureID				texture;
 		std::vector<Direction>  directions; // vector describes path of Vehicle
 		sf::IntRect				textureRect;
+		float					speed;
 	};
 
 	std::map<Frog::Type, FrogData>					initializeFrogData();
