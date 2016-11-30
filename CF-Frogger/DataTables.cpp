@@ -16,6 +16,7 @@ These additions and modifications are my sole work for prog 1266
 #include "DataTables.h"
 #include "Plane.h"
 #include "ParticleNode.h"
+#include "Vehicle.h"
 
 #include <functional>
 
@@ -51,6 +52,17 @@ namespace GEX
 
 		data[Particle::Type::smoke].color = sf::Color(50, 50, 50);
 		data[Particle::Type::smoke].lifetime = sf::seconds(4.f);
+
+		return data;
+	}
+
+	std::map<Vehicle::Type, VehicleData> initializeVehicleData()
+	{
+		std::map<Vehicle::Type, VehicleData> data;
+
+		data[Vehicle::Type::Car].texture = TextureID::Car;
+		data[Vehicle::Type::Car].directions.push_back(Direction(+50.f, 70.f));
+		data[Vehicle::Type::Car].textureRect = sf::IntRect( 1, 62, 35, 29);
 
 		return data;
 	}

@@ -5,8 +5,6 @@
 
 namespace GEX
 {
-	const std::map<Frog::Type, FrogData> table = initializeFrogData();
-
 	Entity::Entity(int hitpoints) :
 		_velocity(),
 		_angularVelocity(),

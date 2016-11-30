@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "2turtles 1.png",
+	"filename": "2turtles 1.jpg",
 	"frame": {"x":125,"y":1,"w":65,"h":26},
 	"rotated": false,
 	"trimmed": true,
@@ -10,7 +10,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "2turtles 2.png",
+	"filename": "2turtles 2.jpg",
 	"frame": {"x":388,"y":31,"w":59,"h":29},
 	"rotated": false,
 	"trimmed": true,
@@ -19,7 +19,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "2turtles 3.png",
+	"filename": "2turtles 3.jpg",
 	"frame": {"x":1,"y":100,"w":66,"h":36},
 	"rotated": false,
 	"trimmed": true,
@@ -28,7 +28,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "2turtles 4.png",
+	"filename": "2turtles 4.jpg",
 	"frame": {"x":1,"y":1,"w":0,"h":0},
 	"rotated": false,
 	"trimmed": true,
@@ -37,7 +37,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "3turtles 1.png",
+	"filename": "3turtles 1.jpg",
 	"frame": {"x":192,"y":1,"w":99,"h":26},
 	"rotated": false,
 	"trimmed": true,
@@ -46,7 +46,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "3turtles 2.png",
+	"filename": "3turtles 2.jpg",
 	"frame": {"x":293,"y":31,"w":93,"h":29},
 	"rotated": false,
 	"trimmed": true,
@@ -55,7 +55,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "3turtles 3.png",
+	"filename": "3turtles 3.jpg",
 	"frame": {"x":367,"y":62,"w":100,"h":36},
 	"rotated": false,
 	"trimmed": true,
@@ -64,7 +64,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "3turtles 4.png",
+	"filename": "3turtles 4.jpg",
 	"frame": {"x":1,"y":1,"w":0,"h":0},
 	"rotated": false,
 	"trimmed": true,
@@ -73,7 +73,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "bugIcon.png",
+	"filename": "bugIcon.jpg",
 	"frame": {"x":96,"y":1,"w":27,"h":26},
 	"rotated": false,
 	"trimmed": true,
@@ -82,7 +82,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "car.png",
+	"filename": "car.jpg",
 	"frame": {"x":1,"y":62,"w":35,"h":29},
 	"rotated": false,
 	"trimmed": true,
@@ -91,7 +91,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "croc 1.png",
+	"filename": "croc 1.jpg",
 	"frame": {"x":179,"y":100,"w":102,"h":40},
 	"rotated": false,
 	"trimmed": false,
@@ -100,7 +100,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "croc 2.png",
+	"filename": "croc 2.jpg",
 	"frame": {"x":38,"y":62,"w":102,"h":31},
 	"rotated": false,
 	"trimmed": true,
@@ -109,7 +109,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "crocIcon.png",
+	"filename": "crocIcon.jpg",
 	"frame": {"x":319,"y":100,"w":36,"h":40},
 	"rotated": false,
 	"trimmed": true,
@@ -118,7 +118,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "die 1.png",
+	"filename": "die 1.jpg",
 	"frame": {"x":108,"y":100,"w":29,"h":38},
 	"rotated": false,
 	"trimmed": true,
@@ -127,7 +127,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "die 2.png",
+	"filename": "die 2.jpg",
 	"frame": {"x":357,"y":100,"w":36,"h":40},
 	"rotated": false,
 	"trimmed": true,
@@ -136,7 +136,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "die 3.png",
+	"filename": "die 3.jpg",
 	"frame": {"x":283,"y":100,"w":34,"h":40},
 	"rotated": false,
 	"trimmed": true,
@@ -145,7 +145,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "down 1.png",
+	"filename": "down 1.jpg",
 	"frame": {"x":26,"y":1,"w":33,"h":23},
 	"rotated": false,
 	"trimmed": true,
@@ -154,7 +154,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "down 2.png",
+	"filename": "down 2.jpg",
 	"frame": {"x":142,"y":62,"w":34,"h":32},
 	"rotated": false,
 	"trimmed": true,
@@ -163,7 +163,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "frogIcon.png",
+	"filename": "frogIcon.jpg",
 	"frame": {"x":395,"y":100,"w":39,"h":40},
 	"rotated": false,
 	"trimmed": true,
@@ -172,7 +172,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "left 1.png",
+	"filename": "left 1.jpg",
 	"frame": {"x":274,"y":62,"w":23,"h":33},
 	"rotated": false,
 	"trimmed": true,
@@ -181,7 +181,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "left 2.png",
+	"filename": "left 2.jpg",
 	"frame": {"x":299,"y":62,"w":32,"h":34},
 	"rotated": false,
 	"trimmed": true,
@@ -190,7 +190,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "lives.png",
+	"filename": "lives.jpg",
 	"frame": {"x":6,"y":1,"w":18,"h":21},
 	"rotated": false,
 	"trimmed": false,
@@ -199,7 +199,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "raceCarL.png",
+	"filename": "raceCarL.jpg",
 	"frame": {"x":139,"y":100,"w":38,"h":39},
 	"rotated": false,
 	"trimmed": true,
@@ -208,7 +208,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "raceCarR.png",
+	"filename": "raceCarR.jpg",
 	"frame": {"x":69,"y":100,"w":37,"h":37},
 	"rotated": false,
 	"trimmed": true,
@@ -217,7 +217,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "right 1.png",
+	"filename": "right 1.jpg",
 	"frame": {"x":249,"y":62,"w":23,"h":33},
 	"rotated": false,
 	"trimmed": true,
@@ -226,7 +226,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "right 2.png",
+	"filename": "right 2.jpg",
 	"frame": {"x":333,"y":62,"w":32,"h":34},
 	"rotated": false,
 	"trimmed": true,
@@ -235,7 +235,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "tractor.png",
+	"filename": "tractor.jpg",
 	"frame": {"x":214,"y":62,"w":33,"h":33},
 	"rotated": false,
 	"trimmed": true,
@@ -244,7 +244,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "tree1.png",
+	"filename": "tree1.jpg",
 	"frame": {"x":198,"y":31,"w":93,"h":29},
 	"rotated": false,
 	"trimmed": true,
@@ -253,7 +253,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "tree2.png",
+	"filename": "tree2.jpg",
 	"frame": {"x":1,"y":31,"w":195,"h":28},
 	"rotated": false,
 	"trimmed": true,
@@ -262,7 +262,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "truck.png",
+	"filename": "truck.jpg",
 	"frame": {"x":293,"y":1,"w":61,"h":28},
 	"rotated": false,
 	"trimmed": true,
@@ -271,7 +271,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "up 1.png",
+	"filename": "up 1.jpg",
 	"frame": {"x":61,"y":1,"w":33,"h":23},
 	"rotated": false,
 	"trimmed": true,
@@ -280,7 +280,7 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
-	"filename": "up 2.png",
+	"filename": "up 2.jpg",
 	"frame": {"x":178,"y":62,"w":34,"h":32},
 	"rotated": false,
 	"trimmed": true,
@@ -291,7 +291,7 @@
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "IdleAtlas.png",
+	"image": "FroggerAtlas.jpg",
 	"format": "RGBA8888",
 	"size": {"w":468,"h":141},
 	"scale": "1",
