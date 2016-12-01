@@ -179,6 +179,12 @@ namespace GEX
 		addEnemy(Vehicle::Type::Tractor, -235, _worldBounds.height - 520);
 		addEnemy(Vehicle::Type::Truck, 250, _worldBounds.height - 400);
 
+		addEnemy(Vehicle::Type::Car, 250, _worldBounds.height - 480);
+		addEnemy(Vehicle::Type::RaceCarL, 300, _worldBounds.height - 560);
+		addEnemy(Vehicle::Type::RaceCarR, -235, _worldBounds.height - 440);
+		addEnemy(Vehicle::Type::Tractor, -235, _worldBounds.height - 520);
+		addEnemy(Vehicle::Type::Truck, 250, _worldBounds.height - 400);
+
 		std::sort(_enemySpawnPoints.begin(), _enemySpawnPoints.end(), [](SpawnPoint lhs, SpawnPoint rhs) {return lhs.y < rhs.y;	});
 	}
 

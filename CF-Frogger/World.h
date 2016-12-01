@@ -20,6 +20,7 @@ These additions and modifications are my sole work for prog 1266
 #include "CommandQueue.h"
 #include "Plane.h"
 #include "Vehicle.h"
+#include "RiverObject.h"
 
 #include <vector>
 #include <array>
@@ -70,6 +71,7 @@ namespace GEX
 		void			spawnEnemies();
 		void			addEnemies();
 		void			addEnemy(Vehicle::Type type, float relX, float relY);
+		void			addEnemy(RiverObject::Type type, float relX, float relY);
 		void			addEnemy(SpawnPoint point);
 
 		void			handleCollisions();

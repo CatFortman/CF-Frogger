@@ -43,6 +43,7 @@
     <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="PlayerControl.cpp" />
+    <ClCompile Include="RiverObject.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="SoundBufferHolder.cpp" />
     <ClCompile Include="SoundNode.cpp" />
@@ -87,6 +88,7 @@
     <ClInclude Include="plane.h" />
     <ClInclude Include="PlayerControl.h" />
     <ClInclude Include="ResourceIdentifiers.h" />
+    <ClInclude Include="RiverObject.h" />
     <ClInclude Include="SceneNode.h" />
     <ClInclude Include="SoundBufferHolder.h" />
     <ClInclude Include="SoundNode.h" />
