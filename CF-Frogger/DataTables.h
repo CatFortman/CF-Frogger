@@ -17,6 +17,7 @@ These additions and modifications are my sole work for prog 1266
 #include "ResourceIdentifiers.h"
 #include "Plane.h"
 #include "Partcile.h"
+#include "Vehicle.h"
 
 #include <map>
 #include <vector>
@@ -44,6 +45,15 @@ namespace GEX
 		sf::Time								lifetime;
 	};
 
+	struct VehicleData
+	{
+		TextureID				texture;
+		std::vector<Direction>  directions; // vector describes path of Vehicle
+		sf::IntRect				textureRect;
+		float					speed;
+	};
+
 	std::map<Frog::Type, FrogData>					initializeFrogData();
 	std::map<Particle::Type, ParticleData>			initializeParticleData();
+	std::map<Vehicle::Type, VehicleData>			initializeVehicleData();
 }

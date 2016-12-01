@@ -46,7 +46,9 @@ namespace GEX
 		sf::Sprite		_sprite;
 
 		sf::Vector2f    _pixels;
+
 		bool			_frogMove;
+
 		float			_angularVelocity;
 		sf::Vector2f	_velocity;
 

@@ -5,8 +5,6 @@
 
 namespace GEX
 {
-	const std::map<Frog::Type, FrogData> table = initializeFrogData();
-
 	Entity::Entity(int hitpoints) :
 		_velocity(),
 		_angularVelocity(),
@@ -92,6 +90,7 @@ namespace GEX
 			setPosition(getPosition() + _pixels);
 			_frogMove = false;
 		}
+		move(_velocity * dt.asSeconds());
 	}
 
 	int Entity::getHitPoints() const

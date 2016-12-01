@@ -19,6 +19,7 @@ These additions and modifications are my sole work for prog 1266
 #include "SceneNode.h"
 #include "CommandQueue.h"
 #include "Plane.h"
+#include "Vehicle.h"
 
 #include <vector>
 #include <array>
@@ -48,11 +49,11 @@ namespace GEX
 
 		struct SpawnPoint
 		{
-			SpawnPoint(Frog::Type type, float _x, float _y) :
+			SpawnPoint(Vehicle::Type type, float _x, float _y) :
 				type(type),
 				x(_x),
 				y(_y) {}
-			Frog::Type type;
+			Vehicle::Type type;
 			float		x;
 			float		y;
 		};
@@ -68,7 +69,7 @@ namespace GEX
 
 		void			spawnEnemies();
 		void			addEnemies();
-		void			addEnemy(Frog::Type type, float relX, float relY);
+		void			addEnemy(Vehicle::Type type, float relX, float relY);
 		void			addEnemy(SpawnPoint point);
 
 		void			handleCollisions();
@@ -82,6 +83,7 @@ namespace GEX
 			Ground,
 			Road,
 			River,
+			LaneNode,
 			LayerCount
 		};
 
@@ -95,8 +97,11 @@ namespace GEX
 		sf::Vector2f						_spawnPosition;
 		float								_scrollSpeed;
 		Frog*								_player;
-		std::vector<SpawnPoint>				_enemySpawnPoints;
 
-		std::vector<Frog*>					_activeEnemies;
+		sf::Clock							_enemySpawnTimer;
+
+		std::deque<SpawnPoint>				_enemySpawnPoints;
+		std::vector<Vehicle*>					_vehicles;
+		std::vector<Vehicle*>				_activeEnemies;
 	};
 }

@@ -22,6 +22,7 @@ These additions and modifications are my sole work for prog 1266
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <cstdlib>
 
 namespace GEX
 {
@@ -54,6 +55,7 @@ namespace GEX
 		_sceneLayers(),
 		_worldBounds(0.f, 0.f, _worldView.getSize().x, _worldView.getSize().y),
 		_spawnPosition(_worldView.getSize().x / 2.f, _worldBounds.height - 20 ),
+		_enemySpawnTimer(),
 		_queue(),
 		_player(nullptr)
 	{
@@ -71,15 +73,6 @@ namespace GEX
 
 	void World::update(sf::Time deltaTime)
 	{
-		//_worldView.zoom(1.00001); //goes OUT slowly
-		//_worldView.rotate(0.001); //spins!
-
-		//background
-		//_worldView.move(0.f, _scrollSpeed * deltaTime.asSeconds()); // moves the view which moves the background moves and not the Frogs
-		//_player->setVelocity(0.f, 0.f);
-
-		//destroyEnemiesOutsideView(); // sets hp = 0 if outside of view
-
 		// run all the commands
 		while (!_queue.isEmpty())
 		{
@@ -108,9 +101,9 @@ namespace GEX
 		{
 			velocity.y *= -1;
 			_playerAircraft->setVelocity(velocity);
-		}
+		}*/;
 
-		spawnEnemies();*/
+		spawnEnemies();
 		//movement
 		_sceneGraph.update(deltaTime, getCommandQueue());
 		//adaptPlayerPostition();
@@ -159,25 +152,37 @@ namespace GEX
 
 	void World::spawnEnemies()
 	{
-		while (!_enemySpawnPoints.empty() && (_enemySpawnPoints.back().y > getBattlefieldBounds().top))
+		auto spawn = _enemySpawnPoints.back();	// get's the spawn point and vehicle from vector
+		auto spawnPos = spawn;	// keeps the spawn
+		std::unique_ptr<Vehicle> temp(new Vehicle(spawn.type)); // creates the vehicle with spawn position
+
+		// if it has been five seconds or the vehicle is not on the map then add it to the map 
+		if ((_enemySpawnTimer.getElapsedTime() >= sf::seconds(1)) || (!getBattlefieldBounds().intersects(temp->getBoundingRect())))
 		{
-			auto spawn = _enemySpawnPoints.back();
-			std::unique_ptr<Frog> enemy(new Frog(spawn.type));
-			enemy->setPosition(spawn.x, spawn.y);
-			enemy->setRotation(180);
-			_sceneLayers[Ground]->attatchChild(std::move(enemy));
+			//_vehicles.push_back(temp.get());
+
+			temp->setPosition(spawn.x, spawn.y);
+			_sceneLayers[LaneNode]->attatchChild(std::move(temp));
 			_enemySpawnPoints.pop_back();
+			_enemySpawnPoints.push_front(spawnPos);
+	
+			_enemySpawnTimer.restart();
 		}
 	}
 
 	void World::addEnemies()
 	{
 		// add enemy spawn points
+		addEnemy(Vehicle::Type::Car, 250, _worldBounds.height - 480);
+		addEnemy(Vehicle::Type::RaceCarL, 300, _worldBounds.height - 560);
+		addEnemy(Vehicle::Type::RaceCarR, -235, _worldBounds.height - 440);
+		addEnemy(Vehicle::Type::Tractor, -235, _worldBounds.height - 520);
+		addEnemy(Vehicle::Type::Truck, 250, _worldBounds.height - 400);
 
 		std::sort(_enemySpawnPoints.begin(), _enemySpawnPoints.end(), [](SpawnPoint lhs, SpawnPoint rhs) {return lhs.y < rhs.y;	});
 	}
 
-	void World::addEnemy(Frog::Type type, float relX, float relY)
+	void World::addEnemy(Vehicle::Type type, float relX, float relY)
 	{
 		addEnemy(SpawnPoint(type, relX, relY));
 	}
@@ -192,7 +197,6 @@ namespace GEX
 	void World::buildScene()
 	{
 		//LAYER NODES FOR SCENE GRAPH
-
 		for (std::size_t i = 0; i < LayerCount; i++)
 		{
 			Category::type category = (i == Ground) ? Category::sceneGroundLayer : Category::none;
@@ -238,6 +242,9 @@ namespace GEX
 		std::unique_ptr<SpriteNode> _frogLife3(new SpriteNode(texture2, textureRect2));
 		_frogLife3->setPosition(_worldView.getSize().x - 130, _worldBounds.height - 590);
 		_sceneLayers[Background]->attatchChild(std::move(_frogLife3));
+
+		// add the enemies
+		addEnemies();
 	}
 
 	void World::handleCollisions()

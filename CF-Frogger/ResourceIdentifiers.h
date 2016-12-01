@@ -23,7 +23,12 @@ namespace GEX
 		Particle,
 		Explosion,
 		FrogLives,
-		FrogJump
+		FrogJump,
+		Car, 
+		RaceCarL, 
+		RaceCarR, 
+		Tractor, 
+		Truck
 	};
 
 	enum class SoundEffectID {
