@@ -55,6 +55,7 @@ namespace GEX
 		_sceneLayers(),
 		_worldBounds(0.f, 0.f, _worldView.getSize().x, _worldView.getSize().y),
 		_spawnPosition(_worldView.getSize().x / 2.f, _worldBounds.height - 20 ),
+		_enemySpawnTimer(),
 		_queue(),
 		_player(nullptr)
 	{
@@ -151,17 +152,21 @@ namespace GEX
 
 	void World::spawnEnemies()
 	{
-		// random amount in lane from 2 -3
-		int ran = rand() % 3 + 1;
+		auto spawn = _enemySpawnPoints.back();	// get's the spawn point and vehicle from vector
+		auto spawnPos = spawn;	// keeps the spawn
+		std::unique_ptr<Vehicle> temp(new Vehicle(spawn.type)); // creates the vehicle with spawn position
 
-		while (_enemySpawnPoints.back().x > getBattlefieldBounds().left)
+		// if it has been five seconds or the vehicle is not on the map then add it to the map 
+		if ((_enemySpawnTimer.getElapsedTime() >= sf::seconds(1)) || (!getBattlefieldBounds().intersects(temp->getBoundingRect())))
 		{
-			auto spawn = _enemySpawnPoints.back();
-			std::unique_ptr<Vehicle> temp(new Vehicle(spawn.type));
-			auto vehicle = _vehicles[spawn.type];
+			//_vehicles.push_back(temp.get());
 
 			temp->setPosition(spawn.x, spawn.y);
 			_sceneLayers[LaneNode]->attatchChild(std::move(temp));
+			_enemySpawnPoints.pop_back();
+			_enemySpawnPoints.push_front(spawnPos);
+	
+			_enemySpawnTimer.restart();
 		}
 	}
 
@@ -172,6 +177,7 @@ namespace GEX
 		addEnemy(Vehicle::Type::RaceCarL, 300, _worldBounds.height - 560);
 		addEnemy(Vehicle::Type::RaceCarR, -235, _worldBounds.height - 440);
 		addEnemy(Vehicle::Type::Tractor, -235, _worldBounds.height - 520);
+		addEnemy(Vehicle::Type::Truck, 250, _worldBounds.height - 400);
 
 		std::sort(_enemySpawnPoints.begin(), _enemySpawnPoints.end(), [](SpawnPoint lhs, SpawnPoint rhs) {return lhs.y < rhs.y;	});
 	}

@@ -98,8 +98,10 @@ namespace GEX
 		float								_scrollSpeed;
 		Frog*								_player;
 
-		std::vector<SpawnPoint>				_enemySpawnPoints;
-		std::map<Vehicle::Type, Vehicle*>				_vehicles;
+		sf::Clock							_enemySpawnTimer;
+
+		std::deque<SpawnPoint>				_enemySpawnPoints;
+		std::vector<Vehicle*>					_vehicles;
 		std::vector<Vehicle*>				_activeEnemies;
 	};
 }
