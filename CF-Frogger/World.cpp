@@ -22,6 +22,7 @@ These additions and modifications are my sole work for prog 1266
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <cstdlib>
 
 namespace GEX
 {
@@ -150,20 +151,27 @@ namespace GEX
 
 	void World::spawnEnemies()
 	{
-		while (!_enemySpawnPoints.empty() && (_enemySpawnPoints.back().y > getBattlefieldBounds().top))
+		// random amount in lane from 2 -3
+		int ran = rand() % 3 + 1;
+
+		while (_enemySpawnPoints.back().x > getBattlefieldBounds().left)
 		{
 			auto spawn = _enemySpawnPoints.back();
-			std::unique_ptr<Vehicle> enemy(new Vehicle(spawn.type));
-			enemy->setPosition(spawn.x, spawn.y);
-			_sceneLayers[LaneNode]->attatchChild(std::move(enemy));
-			_enemySpawnPoints.pop_back();
+			std::unique_ptr<Vehicle> temp(new Vehicle(spawn.type));
+			auto vehicle = _vehicles[spawn.type];
+
+			temp->setPosition(spawn.x, spawn.y);
+			_sceneLayers[LaneNode]->attatchChild(std::move(temp));
 		}
 	}
 
 	void World::addEnemies()
 	{
 		// add enemy spawn points
-		addEnemy(Vehicle::Type::Car, _worldView.getSize().x / 2.f, _worldBounds.height - 400);
+		addEnemy(Vehicle::Type::Car, 250, _worldBounds.height - 480);
+		addEnemy(Vehicle::Type::RaceCarL, 300, _worldBounds.height - 560);
+		addEnemy(Vehicle::Type::RaceCarR, -235, _worldBounds.height - 440);
+		addEnemy(Vehicle::Type::Tractor, -235, _worldBounds.height - 520);
 
 		std::sort(_enemySpawnPoints.begin(), _enemySpawnPoints.end(), [](SpawnPoint lhs, SpawnPoint rhs) {return lhs.y < rhs.y;	});
 	}

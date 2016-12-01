@@ -90,6 +90,7 @@ namespace GEX
 			setPosition(getPosition() + _pixels);
 			_frogMove = false;
 		}
+		move(_velocity * dt.asSeconds());
 	}
 
 	int Entity::getHitPoints() const

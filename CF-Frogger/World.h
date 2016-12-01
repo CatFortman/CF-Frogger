@@ -97,8 +97,9 @@ namespace GEX
 		sf::Vector2f						_spawnPosition;
 		float								_scrollSpeed;
 		Frog*								_player;
-		std::vector<SpawnPoint>				_enemySpawnPoints;
 
+		std::vector<SpawnPoint>				_enemySpawnPoints;
+		std::map<Vehicle::Type, Vehicle*>				_vehicles;
 		std::vector<Vehicle*>				_activeEnemies;
 	};
 }

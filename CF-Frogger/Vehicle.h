@@ -40,7 +40,7 @@ namespace GEX
 
 		int						_directionIndex;
 		float					_travelDistance;
-
+	
 		bool					_isMarkedForRemoval;
 	};
 

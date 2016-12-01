@@ -61,9 +61,29 @@ namespace GEX
 		std::map<Vehicle::Type, VehicleData> data;
 
 		data[Vehicle::Type::Car].texture = TextureID::Car;
-		data[Vehicle::Type::Car].directions.push_back(Direction(-50.f, 0.f));
+		data[Vehicle::Type::Car].directions.push_back(Direction(91.f, 0.f));
 		data[Vehicle::Type::Car].textureRect = sf::IntRect( 1, 62, 35, 29);
 		data[Vehicle::Type::Car].speed = 70.f;
+
+		data[Vehicle::Type::RaceCarL].texture = TextureID::Car;
+		data[Vehicle::Type::RaceCarL].directions.push_back(Direction(91.f, 0.f));
+		data[Vehicle::Type::RaceCarL].textureRect = sf::IntRect(139, 100, 38, 39);
+		data[Vehicle::Type::RaceCarL].speed = 70.f;
+
+		data[Vehicle::Type::RaceCarR].texture = TextureID::Car;
+		data[Vehicle::Type::RaceCarR].directions.push_back(Direction(-91.f, 0.f));
+		data[Vehicle::Type::RaceCarR].textureRect = sf::IntRect(69, 100, 37, 37);
+		data[Vehicle::Type::RaceCarR].speed = 70.f;
+
+		data[Vehicle::Type::Tractor].texture = TextureID::Car;
+		data[Vehicle::Type::Tractor].directions.push_back(Direction(-91.f, 0.f));
+		data[Vehicle::Type::Tractor].textureRect = sf::IntRect(214, 62, 33, 33);
+		data[Vehicle::Type::Tractor].speed = 70.f;
+
+		data[Vehicle::Type::Truck].texture = TextureID::Car;
+		data[Vehicle::Type::Truck].directions.push_back(Direction(91.f, 0.f));
+		data[Vehicle::Type::Truck].textureRect = sf::IntRect(293, 1, 61,  28);
+		data[Vehicle::Type::Truck].speed = 70.f;
 
 		return data;
 	}
