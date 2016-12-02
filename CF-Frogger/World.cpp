@@ -198,11 +198,11 @@ namespace GEX
 		addEnemy(Vehicle::Type::Tractor, -235, _worldBounds.height - 520);
 		addEnemy(Vehicle::Type::Truck, 250, _worldBounds.height - 400);
 
-		addEnemy(RiverObject::Type::tree1, -235, _worldBounds.height - 230);
+		addEnemy(RiverObject::Type::tree1, -235, _worldBounds.height - 240);
 		addEnemy(RiverObject::Type::tree1, -235, _worldBounds.height - 280);
 		addEnemy(RiverObject::Type::tree2, -235, _worldBounds.height - 160);
 		addEnemy(RiverObject::Type::threeTurtles1, 250, _worldBounds.height - 320);
-		addEnemy(RiverObject::Type::turtles1, 250, _worldBounds.height - 190);
+		addEnemy(RiverObject::Type::turtles1, 250, _worldBounds.height - 200);
 
 		std::sort(_vehicleSpawnPoints.begin(), _vehicleSpawnPoints.end(), [](SpawnPointVehicle lhs, SpawnPointVehicle rhs) {return lhs.y < rhs.y;	});
 		std::sort(_riverSpawnPoints.begin(), _riverSpawnPoints.end(), [](SpawnPointRiverObject lhs, SpawnPointRiverObject rhs) {return lhs.y < rhs.y;	});
