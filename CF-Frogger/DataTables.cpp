@@ -62,9 +62,15 @@ namespace GEX
 		std::map<RiverObject::Type, RiverObjectData> data;
 
 		data[RiverObject::Type::tree1].texture = TextureID::tree1;
-		data[RiverObject::Type::tree1].directions.push_back(Direction(91.f, 0.f));
+		data[RiverObject::Type::tree1].directions.push_back(Direction(-91.f, 0.f));
 		data[RiverObject::Type::tree1].textureRect = sf::IntRect(198, 31, 93, 29);
 		data[RiverObject::Type::tree1].speed = 70.f;
+
+		data[RiverObject::Type::tree2].texture = TextureID::tree2;
+		data[RiverObject::Type::tree2].directions.push_back(Direction(-91.f, 0.f));
+		data[RiverObject::Type::tree2].textureRect = sf::IntRect(1, 31, 195, 28);
+		data[RiverObject::Type::tree2].speed = 70.f;
+
 
 		return data;
 	}

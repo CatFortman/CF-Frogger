@@ -43,6 +43,15 @@ namespace GEX
 		TextureHolder::getInstance().load(TextureID::Tractor, "Media/Textures/FroggerAtlas.png");
 		TextureHolder::getInstance().load(TextureID::Truck, "Media/Textures/FroggerAtlas.png");
 		TextureHolder::getInstance().load(TextureID::tree1, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::tree2, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::turtles1, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::turtles2, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::turtles3, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::turtles4, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::threeTurtles1, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::threeTurtles2, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::threeTurtles3, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::threeTurtles4, "Media/Textures/FroggerAtlas.png");
 
 		_statsText.setFont(FontHolder::getInstance().get(FontID::Main));
 		_statsText.setPosition(5.f, 5.f);
