@@ -108,7 +108,7 @@ namespace GEX
 		spawnEnemies();
 		//movement
 		_sceneGraph.update(deltaTime, getCommandQueue());
-		//adaptPlayerPostition();
+		adaptPlayerPostition();
 	}
 
 
@@ -118,14 +118,14 @@ namespace GEX
 		// at least borderDistance units from the border
 
 		sf::FloatRect viewBounds(_worldView.getCenter() - _worldView.getSize() / 2.f, _worldView.getSize());
-		const float borderDistance = 35.f;
+		const float borderDistance = 15.f;
 
 		sf::Vector2f position = _player->getPosition();
 		position.x = std::max(position.x, viewBounds.left + borderDistance);
 		position.x = std::min(position.x, viewBounds.left + viewBounds.width - borderDistance);
 		position.y = std::max(position.y, viewBounds.top + borderDistance);
 		position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
-		//_playerAircraft->setPosition(position);
+		_player->setPosition(position);
 	}
 
 	void World::draw()

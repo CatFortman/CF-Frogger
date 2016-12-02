@@ -32,7 +32,7 @@ namespace GEX
 	private:
 		void			initalizeKeyBindings();
 		void			initalizeActionBindings();
-		bool			isRealTimeAction(Action action);
+		bool			isEventAction(Action action);
 
 	private:
 		std::map<sf::Keyboard::Key, Action> _keyBindings;
