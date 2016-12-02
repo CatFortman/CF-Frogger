@@ -71,6 +71,16 @@ namespace GEX
 		data[RiverObject::Type::tree2].textureRect = sf::IntRect(1, 31, 195, 28);
 		data[RiverObject::Type::tree2].speed = 70.f;
 
+		data[RiverObject::Type::turtles1].texture = TextureID::turtles1;
+		data[RiverObject::Type::turtles1].directions.push_back(Direction(91.f, 0.f));
+		data[RiverObject::Type::turtles1].textureRect = sf::IntRect(125, 1, 65, 26);
+		data[RiverObject::Type::turtles1].speed = 70.f;
+
+		data[RiverObject::Type::threeTurtles1].texture = TextureID::threeTurtles1;
+		data[RiverObject::Type::threeTurtles1].directions.push_back(Direction(91.f, 0.f));
+		data[RiverObject::Type::threeTurtles1].textureRect = sf::IntRect(192, 1, 99, 26);
+		data[RiverObject::Type::threeTurtles1].speed = 70.f;
+
 
 		return data;
 	}
