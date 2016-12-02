@@ -15,6 +15,7 @@ These additions and modifications are my sole work for prog 1266
 
 #include "World.h"
 #include "Plane.h"
+#include "RiverObject.h"
 #include "TextureHolder.h"
 #include "SpriteNode.h"
 #include "ParticleNode.h"
@@ -55,7 +56,8 @@ namespace GEX
 		_sceneLayers(),
 		_worldBounds(0.f, 0.f, _worldView.getSize().x, _worldView.getSize().y),
 		_spawnPosition(_worldView.getSize().x / 2.f, _worldBounds.height - 20 ),
-		_enemySpawnTimer(),
+		_vehicleSpawnTimer(),
+		_riverSpawnTimer(),
 		_queue(),
 		_player(nullptr)
 	{
@@ -152,21 +154,38 @@ namespace GEX
 
 	void World::spawnEnemies()
 	{
-		auto spawn = _enemySpawnPoints.back();	// get's the spawn point and vehicle from vector
-		auto spawnPos = spawn;	// keeps the spawn
-		std::unique_ptr<Vehicle> temp(new Vehicle(spawn.type)); // creates the vehicle with spawn position
+		auto spawnV = _vehicleSpawnPoints.back();	// get's the spawn point and vehicle from vector
+		auto spawnVPos = spawnV;	// keeps the spawn
+		std::unique_ptr<Vehicle> temp(new Vehicle(spawnV.type)); // creates the vehicle with spawn position
 
 		// if it has been five seconds or the vehicle is not on the map then add it to the map 
-		if ((_enemySpawnTimer.getElapsedTime() >= sf::seconds(1)) || (!getBattlefieldBounds().intersects(temp->getBoundingRect())))
+		if ((_vehicleSpawnTimer.getElapsedTime() >= sf::seconds(1)) || (!getBattlefieldBounds().intersects(temp->getBoundingRect())))
 		{
 			//_vehicles.push_back(temp.get());
 
-			temp->setPosition(spawn.x, spawn.y);
+			temp->setPosition(spawnV.x, spawnV.y);
 			_sceneLayers[LaneNode]->attatchChild(std::move(temp));
-			_enemySpawnPoints.pop_back();
-			_enemySpawnPoints.push_front(spawnPos);
+			_vehicleSpawnPoints.pop_back();
+			_vehicleSpawnPoints.push_front(spawnVPos);
 	
-			_enemySpawnTimer.restart();
+			_vehicleSpawnTimer.restart();
+		}
+
+		auto spawnR = _riverSpawnPoints.back();	// get's the spawn point and river from vector
+		auto spawnRPos = spawnR;	// keeps the spawn
+		std::unique_ptr<RiverObject> tempR(new RiverObject(spawnR.type)); // creates the river object with spawn position
+
+																 // if it has been five seconds or the vehicle is not on the map then add it to the map 
+		if ((_riverSpawnTimer.getElapsedTime() >= sf::seconds(2)) || (!getBattlefieldBounds().intersects(tempR->getBoundingRect())))
+		{
+			//_vehicles.push_back(temp.get());
+
+			tempR->setPosition(spawnR.x, spawnR.y);
+			_sceneLayers[RiverNode]->attatchChild(std::move(tempR));
+			_riverSpawnPoints.pop_back();
+			_riverSpawnPoints.push_front(spawnRPos);
+
+			_riverSpawnTimer.restart();
 		}
 	}
 
@@ -179,25 +198,34 @@ namespace GEX
 		addEnemy(Vehicle::Type::Tractor, -235, _worldBounds.height - 520);
 		addEnemy(Vehicle::Type::Truck, 250, _worldBounds.height - 400);
 
-		addEnemy(Vehicle::Type::Car, 250, _worldBounds.height - 480);
-		addEnemy(Vehicle::Type::RaceCarL, 300, _worldBounds.height - 560);
-		addEnemy(Vehicle::Type::RaceCarR, -235, _worldBounds.height - 440);
-		addEnemy(Vehicle::Type::Tractor, -235, _worldBounds.height - 520);
-		addEnemy(Vehicle::Type::Truck, 250, _worldBounds.height - 400);
+		addEnemy(RiverObject::Type::tree1, 250, _worldBounds.height - 320);
 
-		std::sort(_enemySpawnPoints.begin(), _enemySpawnPoints.end(), [](SpawnPoint lhs, SpawnPoint rhs) {return lhs.y < rhs.y;	});
+		std::sort(_vehicleSpawnPoints.begin(), _vehicleSpawnPoints.end(), [](SpawnPointVehicle lhs, SpawnPointVehicle rhs) {return lhs.y < rhs.y;	});
+		std::sort(_riverSpawnPoints.begin(), _riverSpawnPoints.end(), [](SpawnPointRiverObject lhs, SpawnPointRiverObject rhs) {return lhs.y < rhs.y;	});
 	}
 
 	void World::addEnemy(Vehicle::Type type, float relX, float relY)
 	{
-		addEnemy(SpawnPoint(type, relX, relY));
+		addEnemy(SpawnPointVehicle(type, relX, relY));
 	}
 
-	void World::addEnemy(SpawnPoint point)
+	void World::addEnemy(RiverObject::Type type, float relX, float relY)
+	{
+		addEnemy(SpawnPointRiverObject(type, relX, relY));
+	}
+
+	void World::addEnemy(SpawnPointVehicle point)
 	{
 		point.x = _spawnPosition.x + point.x;
 		point.y = _spawnPosition.y - point.y;
-		_enemySpawnPoints.push_back(point);
+		_vehicleSpawnPoints.push_back(point);
+	}
+
+	void World::addEnemy(SpawnPointRiverObject point)
+	{
+		point.x = _spawnPosition.x + point.x;
+		point.y = _spawnPosition.y - point.y;
+		_riverSpawnPoints.push_back(point);
 	}
 
 	void World::buildScene()

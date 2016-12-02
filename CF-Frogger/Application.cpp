@@ -42,6 +42,7 @@ namespace GEX
 		TextureHolder::getInstance().load(TextureID::RaceCarR, "Media/Textures/FroggerAtlas.png");
 		TextureHolder::getInstance().load(TextureID::Tractor, "Media/Textures/FroggerAtlas.png");
 		TextureHolder::getInstance().load(TextureID::Truck, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::tree1, "Media/Textures/FroggerAtlas.png");
 
 		_statsText.setFont(FontHolder::getInstance().get(FontID::Main));
 		_statsText.setPosition(5.f, 5.f);

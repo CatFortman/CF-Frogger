@@ -48,13 +48,25 @@ namespace GEX
 		
 	private:
 
-		struct SpawnPoint
+		struct SpawnPointVehicle
 		{
-			SpawnPoint(Vehicle::Type type, float _x, float _y) :
+			SpawnPointVehicle(Vehicle::Type type, float _x, float _y) :
 				type(type),
 				x(_x),
 				y(_y) {}
 			Vehicle::Type type;
+			float		x;
+			float		y;
+		};
+
+
+		struct SpawnPointRiverObject
+		{
+			SpawnPointRiverObject(RiverObject::Type type, float _x, float _y) :
+				type(type),
+				x(_x),
+				y(_y) {}
+			RiverObject::Type type;
 			float		x;
 			float		y;
 		};
@@ -72,7 +84,8 @@ namespace GEX
 		void			addEnemies();
 		void			addEnemy(Vehicle::Type type, float relX, float relY);
 		void			addEnemy(RiverObject::Type type, float relX, float relY);
-		void			addEnemy(SpawnPoint point);
+		void			addEnemy(SpawnPointVehicle point);
+		void			addEnemy(SpawnPointRiverObject point);
 
 		void			handleCollisions();
 		void			destroyEnemiesOutsideView();
@@ -84,7 +97,7 @@ namespace GEX
 			Background,
 			Ground,
 			Road,
-			River,
+			RiverNode,
 			LaneNode,
 			LayerCount
 		};
@@ -100,10 +113,12 @@ namespace GEX
 		float								_scrollSpeed;
 		Frog*								_player;
 
-		sf::Clock							_enemySpawnTimer;
+		sf::Clock							_vehicleSpawnTimer;
+		sf::Clock							_riverSpawnTimer;
 
-		std::deque<SpawnPoint>				_enemySpawnPoints;
-		std::vector<Vehicle*>					_vehicles;
+		std::deque<SpawnPointVehicle>		_vehicleSpawnPoints;
+		std::deque<SpawnPointRiverObject>	_riverSpawnPoints;
+		std::vector<Vehicle*>				_vehicles;
 		std::vector<Vehicle*>				_activeEnemies;
 	};
 }

@@ -65,6 +65,8 @@ namespace GEX
 		data[RiverObject::Type::tree1].directions.push_back(Direction(91.f, 0.f));
 		data[RiverObject::Type::tree1].textureRect = sf::IntRect(198, 31, 93, 29);
 		data[RiverObject::Type::tree1].speed = 70.f;
+
+		return data;
 	}
 
 	std::map<Vehicle::Type, VehicleData> initializeVehicleData()

@@ -12,7 +12,7 @@ namespace GEX
 	class RiverObject : public Entity
 	{
 	public:
-		enum class  Type { turtles1, turtles2, turtles3,	turtles4, threeTurtles1, threeTurtles2,	threeTurtles3, threeTurtles4, tree1, tree2};
+		enum class  Type { tree1, tree2, turtles1, turtles2, turtles3, turtles4, threeTurtles1, threeTurtles2, threeTurtles3, threeTurtles4};
 
 	public:
 		RiverObject(Type type = Type::tree1);

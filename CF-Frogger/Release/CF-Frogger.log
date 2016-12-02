@@ -1,9 +1,8 @@
-﻿  DataTables.cpp
+﻿  World.cpp
   Generating code
-c:\users\bunny\desktop\classes\firstterm\game dev c++\cf-frogger\cf-frogger\datatables.cpp(68): warning C4715: 'GEX::initializeRiverObjectData': not all control paths return a value
-  186 of 3617 functions ( 5.1%) were compiled, the rest were copied from previous compilation.
-    165 functions were new in current compilation
-    160 functions had inline decision re-evaluated but remain unchanged
+  1 of 3802 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   CF-Frogger.vcxproj -> C:\Users\bunny\Desktop\Classes\FirstTerm\Game Dev C++\CF-Frogger\Release\CF-Frogger.exe
   CF-Frogger.vcxproj -> C:\Users\bunny\Desktop\Classes\FirstTerm\Game Dev C++\CF-Frogger\Release\CF-Frogger.pdb (Full PDB)

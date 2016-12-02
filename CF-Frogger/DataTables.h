@@ -57,7 +57,7 @@ namespace GEX
 	struct RiverObjectData
 	{
 		TextureID				texture;
-		std::vector<Direction>  directions; // vector describes path of Vehicle
+		std::vector<Direction>  directions; // vector describes path of river object
 		sf::IntRect				textureRect;
 		float					speed;
 	};
