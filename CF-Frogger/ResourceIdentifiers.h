@@ -28,7 +28,18 @@ namespace GEX
 		RaceCarL, 
 		RaceCarR, 
 		Tractor, 
-		Truck
+		Truck,
+		turtles1,
+		turtles2,
+		turtles3,
+		turtles4,
+		threeTurtles1,
+		threeTurtles2,
+		threeTurtles3,
+		threeTurtles4,
+		tree1,
+		tree2
+
 	};
 
 	enum class SoundEffectID {

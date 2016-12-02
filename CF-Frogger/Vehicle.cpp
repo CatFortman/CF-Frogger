@@ -12,6 +12,18 @@ namespace GEX
 
 	TextureID toTextureID(Vehicle::Type type)
 	{
+		switch (type) {
+		case Vehicle::Type::Car:
+			return TextureID::Car;
+		case Vehicle::Type::RaceCarL:
+			return TextureID::RaceCarL;
+		case Vehicle::Type::RaceCarR:
+			return TextureID::RaceCarR;
+		case Vehicle::Type::Tractor:
+			return TextureID::Tractor;
+		case Vehicle::Type::Truck:
+			return TextureID::Truck;
+		}
 		return TextureID::Car;
 	}
 

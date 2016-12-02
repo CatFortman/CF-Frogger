@@ -17,6 +17,7 @@ These additions and modifications are my sole work for prog 1266
 #include "Plane.h"
 #include "ParticleNode.h"
 #include "Vehicle.h"
+#include "RiverObject.h"
 
 #include <functional>
 
@@ -56,6 +57,24 @@ namespace GEX
 		return data;
 	}
 
+	std::map<RiverObject::Type, RiverObjectData> initializeRiverObjectData()
+	{
+		std::map<RiverObject::Type, RiverObjectData> data;
+
+		data[RiverObject::Type::tree1].texture = TextureID::tree1;
+		data[RiverObject::Type::tree1].directions.push_back(Direction(-91.f, 0.f));
+		data[RiverObject::Type::tree1].textureRect = sf::IntRect(198, 31, 93, 29);
+		data[RiverObject::Type::tree1].speed = 70.f;
+
+		data[RiverObject::Type::tree2].texture = TextureID::tree2;
+		data[RiverObject::Type::tree2].directions.push_back(Direction(-91.f, 0.f));
+		data[RiverObject::Type::tree2].textureRect = sf::IntRect(1, 31, 195, 28);
+		data[RiverObject::Type::tree2].speed = 70.f;
+
+
+		return data;
+	}
+
 	std::map<Vehicle::Type, VehicleData> initializeVehicleData()
 	{
 		std::map<Vehicle::Type, VehicleData> data;
@@ -65,22 +84,22 @@ namespace GEX
 		data[Vehicle::Type::Car].textureRect = sf::IntRect( 1, 62, 35, 29);
 		data[Vehicle::Type::Car].speed = 70.f;
 
-		data[Vehicle::Type::RaceCarL].texture = TextureID::Car;
+		data[Vehicle::Type::RaceCarL].texture = TextureID::RaceCarL;
 		data[Vehicle::Type::RaceCarL].directions.push_back(Direction(91.f, 0.f));
 		data[Vehicle::Type::RaceCarL].textureRect = sf::IntRect(139, 100, 38, 39);
-		data[Vehicle::Type::RaceCarL].speed = 70.f;
+		data[Vehicle::Type::RaceCarL].speed = 90.f;
 
-		data[Vehicle::Type::RaceCarR].texture = TextureID::Car;
+		data[Vehicle::Type::RaceCarR].texture = TextureID::RaceCarR;
 		data[Vehicle::Type::RaceCarR].directions.push_back(Direction(-91.f, 0.f));
 		data[Vehicle::Type::RaceCarR].textureRect = sf::IntRect(69, 100, 37, 37);
-		data[Vehicle::Type::RaceCarR].speed = 70.f;
+		data[Vehicle::Type::RaceCarR].speed = 90.f;
 
-		data[Vehicle::Type::Tractor].texture = TextureID::Car;
+		data[Vehicle::Type::Tractor].texture = TextureID::Tractor;
 		data[Vehicle::Type::Tractor].directions.push_back(Direction(-91.f, 0.f));
 		data[Vehicle::Type::Tractor].textureRect = sf::IntRect(214, 62, 33, 33);
 		data[Vehicle::Type::Tractor].speed = 70.f;
 
-		data[Vehicle::Type::Truck].texture = TextureID::Car;
+		data[Vehicle::Type::Truck].texture = TextureID::Truck;
 		data[Vehicle::Type::Truck].directions.push_back(Direction(91.f, 0.f));
 		data[Vehicle::Type::Truck].textureRect = sf::IntRect(293, 1, 61,  28);
 		data[Vehicle::Type::Truck].speed = 70.f;
