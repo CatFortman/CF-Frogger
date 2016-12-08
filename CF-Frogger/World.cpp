@@ -300,7 +300,6 @@ namespace GEX
 				{
 					_player->setType(Frog::Type::Die1);
 					_player->setIsDying(true);
-					adjustFrogLives();
 				}
 			}
 			else
