@@ -122,10 +122,6 @@ namespace GEX
 		sf::Texture&						texture2 = TextureHolder::getInstance().get(TextureID::FrogLives);
 		sf::IntRect							textureRect2 = sf::IntRect(395, 100, 39, 40);
 
-		SpriteNode*			_frogLife1;
-		SpriteNode*			_frogLife2;
-		SpriteNode*			_frogLife3;
-
 		std::deque<SpawnPointVehicle>		_vehicleSpawnPoints;
 		std::deque<SpawnPointRiverObject>	_riverSpawnPoints;
 		std::vector<Vehicle*>				_vehicles;
