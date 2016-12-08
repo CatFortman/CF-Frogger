@@ -25,7 +25,7 @@ namespace GEX
 		sf::FloatRect			getBoundingRect() const override;
 
 		bool					isMarkedForRemoval() const;
-		
+		void					adjustFrogLives();
 		void					setIsDying(bool dying);
 		bool					isDying();
 

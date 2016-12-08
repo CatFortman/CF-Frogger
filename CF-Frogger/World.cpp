@@ -281,12 +281,6 @@ namespace GEX
 		_sceneLayers[Ground]->attatchChild(std::move(Frog));
 	}
 
-	void World::adjustFrogLives()
-	{
-		//_frogLife1->isMarkedForRemoval();
-//		_frogLife1->destroy();
-	}
-
 	void World::handleCollisions()
 	{
 		// build list of all pairs of colliding scenenodes

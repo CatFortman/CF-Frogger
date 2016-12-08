@@ -59,6 +59,12 @@ namespace GEX
 	{
 	}
 
+	void Frog::adjustFrogLives()
+	{
+		//_frogLife1->isMarkedForRemoval();
+		//		_frogLife1->destroy();
+	}
+
 	void Frog::playDeathAnimation()
 	{
 		if (_type == Frog::Type::Die1)

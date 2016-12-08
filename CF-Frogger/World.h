@@ -84,8 +84,6 @@ namespace GEX
 
 		void			respawnPlayer();
 
-		void			adjustFrogLives();
-
 		void			spawnEnemies();
 		void			addEnemies();
 		void			addEnemy(Vehicle::Type type, float relX, float relY);
