@@ -24,6 +24,8 @@ These additions and modifications are my sole work for prog 1266
 #include <cassert>
 #include <iostream>
 #include <cstdlib>
+#include <memory>
+#include <iostream>
 
 namespace GEX
 {
@@ -32,10 +34,10 @@ namespace GEX
 		unsigned int category1 = colliders.first->getCategory();
 		unsigned int category2 = colliders.second->getCategory();
 
-		
+
 		if (type1 & category1 && type2 & category2)
 		{
-			std::swap(colliders.first, colliders.second);
+			//std::swap(colliders.first, colliders.second);
 			return true;
 		}
 		else if (type1 & category2 && type2 & category1)
@@ -55,11 +57,14 @@ namespace GEX
 		_sceneGraph(),
 		_sceneLayers(),
 		_worldBounds(0.f, 0.f, _worldView.getSize().x, _worldView.getSize().y),
-		_spawnPosition(_worldView.getSize().x / 2.f, _worldBounds.height - 20 ),
+		_spawnPosition(_worldView.getSize().x / 2.f, _worldBounds.height - 20),
 		_vehicleSpawnTimer(),
 		_riverSpawnTimer(),
 		_queue(),
-		_player(nullptr)
+		_player(nullptr),
+		_frogLife1(new SpriteNode(texture2, textureRect2)),
+		_frogLife2(new SpriteNode(texture2, textureRect2)),
+		_frogLife3(new SpriteNode(texture2, textureRect2))
 	{
 		buildScene();
 
@@ -81,34 +86,19 @@ namespace GEX
 			_sceneGraph.onCommand(_queue.pop(), sf::Time::Zero);
 		}
 
+		destroyEnemiesOutsideView();
 		// handle collsions
-		//handleCollisions();
+		handleCollisions();
 
 		// remove all destroyed enemies
-		//_sceneGraph.removeWrecks();
-
-		// adjusting player pos
-		//sf::Vector2f position = _player->getPosition();
-		//sf::Vector2f velocity = _player->getVelocity();
-
-		// checking OOB
-		//								left side									right side
-		/*if (position.x < _worldBounds.left + 150.f || position.x > _worldBounds.left + _worldBounds.width - 150)
-		{
-			velocity.x *= -1;
-			_playerAircraft->setVelocity(velocity);
-		}
-
-		if (position.y < 0 || position.y > _worldBounds.height)
-		{
-			velocity.y *= -1;
-			_playerAircraft->setVelocity(velocity);
-		}*/;
+		_sceneGraph.removeWrecks();
 
 		spawnEnemies();
 		//movement
-		_sceneGraph.update(deltaTime, getCommandQueue());
 		adaptPlayerPostition();
+
+		_sceneGraph.update(deltaTime, getCommandQueue());
+		//std::cout << _player->getPosition().y << std::endl;
 	}
 
 
@@ -126,6 +116,18 @@ namespace GEX
 		position.y = std::max(position.y, viewBounds.top + borderDistance);
 		position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
 		_player->setPosition(position);
+
+		if (_player->isRespawing())
+		{
+			respawnPlayer();
+			_player->setIsRespawning(false);
+		}
+
+		// set velocity back to zero when not on a log or turtle
+		if (_player->getPosition().y > 340)
+		{
+			_player->setVelocity(0, 0);
+		}
 	}
 
 	void World::draw()
@@ -164,10 +166,10 @@ namespace GEX
 			//_vehicles.push_back(temp.get());
 
 			temp->setPosition(spawnV.x, spawnV.y);
-			_sceneLayers[LaneNode]->attatchChild(std::move(temp));
+			_sceneLayers[Ground]->attatchChild(std::move(temp));
 			_vehicleSpawnPoints.pop_back();
 			_vehicleSpawnPoints.push_front(spawnVPos);
-	
+
 			_vehicleSpawnTimer.restart();
 		}
 
@@ -181,7 +183,7 @@ namespace GEX
 			//_vehicles.push_back(temp.get());
 
 			tempR->setPosition(spawnR.x, spawnR.y);
-			_sceneLayers[RiverNode]->attatchChild(std::move(tempR));
+			_sceneLayers[Ground]->attatchChild(std::move(tempR));
 			_riverSpawnPoints.pop_back();
 			_riverSpawnPoints.push_front(spawnRPos);
 
@@ -192,17 +194,17 @@ namespace GEX
 	void World::addEnemies()
 	{
 		// add enemy spawn points
-		addEnemy(Vehicle::Type::Car, 250, _worldBounds.height - 480);
-		addEnemy(Vehicle::Type::RaceCarL, 300, _worldBounds.height - 560);
-		addEnemy(Vehicle::Type::RaceCarR, -235, _worldBounds.height - 440);
-		addEnemy(Vehicle::Type::Tractor, -235, _worldBounds.height - 520);
-		addEnemy(Vehicle::Type::Truck, 250, _worldBounds.height - 400);
+		addEnemy(Vehicle::Type::Car, 250, 120);
+		addEnemy(Vehicle::Type::RaceCarL, 250, 40);
+		addEnemy(Vehicle::Type::RaceCarR, -235, 160);
+		addEnemy(Vehicle::Type::Tractor, -235, 80);
+		addEnemy(Vehicle::Type::Truck, 250, 200);
 
-		addEnemy(RiverObject::Type::tree1, -235, _worldBounds.height - 240);
-		addEnemy(RiverObject::Type::tree1, -235, _worldBounds.height - 280);
-		addEnemy(RiverObject::Type::tree2, -235, _worldBounds.height - 160);
-		addEnemy(RiverObject::Type::threeTurtles1, 250, _worldBounds.height - 320);
-		addEnemy(RiverObject::Type::turtles1, 250, _worldBounds.height - 200);
+		addEnemy(RiverObject::Type::tree1, -235, 360);
+		addEnemy(RiverObject::Type::tree1, -235, 320);
+		addEnemy(RiverObject::Type::tree2, -235, 440);
+		addEnemy(RiverObject::Type::threeTurtles1, 235, 280);
+		addEnemy(RiverObject::Type::turtles1, 235, 400);
 
 		std::sort(_vehicleSpawnPoints.begin(), _vehicleSpawnPoints.end(), [](SpawnPointVehicle lhs, SpawnPointVehicle rhs) {return lhs.y < rhs.y;	});
 		std::sort(_riverSpawnPoints.begin(), _riverSpawnPoints.end(), [](SpawnPointRiverObject lhs, SpawnPointRiverObject rhs) {return lhs.y < rhs.y;	});
@@ -251,38 +253,38 @@ namespace GEX
 		_background->setPosition(_worldBounds.left, _worldBounds.top);
 		_sceneLayers[Background]->attatchChild(std::move(_background));
 
-		// particle system
-		//std::unique_ptr<ParticleNode> smokeNode(new ParticleNode(Particle::Type::smoke));
-		//_sceneLayers[Air]->attatchChild(std::move(smokeNode));
+		// Frog lives
 
-		//
-		//std::unique_ptr<ParticleNode> fireNode(new ParticleNode(Particle::Type::propellant));
-		//_sceneLayers[Air]->attatchChild(std::move(fireNode));
+		std::unique_ptr<SpriteNode> frogLife1(new SpriteNode(texture2, textureRect2));
+		_frogLife1 = frogLife1.get();
+		frogLife1->setPosition(430, 10);
+		_sceneLayers[Background]->attatchChild(std::move(frogLife1));
+
+
+		std::unique_ptr<SpriteNode> frogLife2(new SpriteNode(texture2, textureRect2));
+		_frogLife2 = frogLife2.get();
+		frogLife2->setPosition(390, 10);
+		_sceneLayers[Background]->attatchChild(std::move(frogLife2));
+
+		std::unique_ptr<SpriteNode> frogLife3(new SpriteNode(texture2, textureRect2));
+		_frogLife3 = frogLife3.get();
+		frogLife3->setPosition(350, 10);
+		_sceneLayers[Background]->attatchChild(std::move(frogLife3));
+
+		// add the enemies
+		addEnemies();
 
 		// Idle
 		std::unique_ptr<Frog> Frog(new Frog(Frog::Type::Idle));
 		_player = Frog.get();
 		_player->setPosition(_spawnPosition);
 		_sceneLayers[Ground]->attatchChild(std::move(Frog));
+	}
 
-		// Frog lives
-		sf::Texture& texture2 = TextureHolder::getInstance().get(TextureID::FrogLives);
-		sf::IntRect textureRect2(395,100,39,40);
-
-		std::unique_ptr<SpriteNode> _frogLife1(new SpriteNode(texture2, textureRect2));
-		_frogLife1->setPosition(_worldView.getSize().x - 50, _worldBounds.height - 590);
-		_sceneLayers[Background]->attatchChild(std::move(_frogLife1));
-
-		std::unique_ptr<SpriteNode> _frogLife2(new SpriteNode(texture2, textureRect2));
-		_frogLife2->setPosition(_worldView.getSize().x - 90, _worldBounds.height - 590);
-		_sceneLayers[Background]->attatchChild(std::move(_frogLife2));
-
-		std::unique_ptr<SpriteNode> _frogLife3(new SpriteNode(texture2, textureRect2));
-		_frogLife3->setPosition(_worldView.getSize().x - 130, _worldBounds.height - 590);
-		_sceneLayers[Background]->attatchChild(std::move(_frogLife3));
-
-		// add the enemies
-		addEnemies();
+	void World::adjustFrogLives()
+	{
+		//_frogLife1->isMarkedForRemoval();
+//		_frogLife1->destroy();
 	}
 
 	void World::handleCollisions()
@@ -295,27 +297,64 @@ namespace GEX
 		{
 			std::cout << collsion.pairs.size() << std::endl;
 		}*/
+		if (_player->getPosition().y < 340)
+		{
+			if (collisionPairs.empty())
+			{
+				// collision: Frogger is destroyed
+				if (_player->isDying() == false)
+				{
+					_player->setType(Frog::Type::Die1);
+					_player->setIsDying(true);
+					adjustFrogLives();
+				}
+			}
+			else
+			{
+				for (SceneNode::pair pair : collisionPairs)
+				{
+					if (matchesCategories(pair, Category::playerCharacter, Category::turtles) || matchesCategories(pair, Category::playerCharacter, Category::logs))
+					{
+						// safe downcasts
+						auto& player = static_cast<Frog&>(*pair.first);
+						auto& enemy = static_cast<RiverObject&>(*pair.second);
+
+						// collision: Frogger is destroyed
+						player.setVelocity(enemy.getVelocity());
+					}
+				}
+			}
+		}
 
 		// for each scenenode pair
-		for (SceneNode::pair pair: collisionPairs)
+		for (SceneNode::pair pair : collisionPairs)
 		{
-			if (matchesCategories(pair, Category::none, Category::none))
+			if (matchesCategories(pair, Category::playerCharacter, Category::vehicle))
 			{
 				// safe downcasts
 				auto& player = static_cast<Frog&>(*pair.first);
-				auto& enemy = static_cast<Frog&>(*pair.second);
+				auto& enemy = static_cast<Vehicle&>(*pair.second);
 
-				// collision: player damage = enemy's remaining hp
-				player.damage(enemy.getHitPoints());
-				enemy.destroy();
+				// collision: Frogger is destroyed
+				if (player.isDying() == false)
+				{
+					player.setType(Frog::Type::Die1);
+					player.setIsDying(true);
+					adjustFrogLives();
+				}
 			}
 		}
+	}
+
+	void World::respawnPlayer()
+	{
+		_player->setPosition(_spawnPosition);
 	}
 
 	void World::destroyEnemiesOutsideView()
 	{
 		Command command;
-		command.category = Category::none | Category::none;
+		command.category = Category::vehicle | Category::logs | Category::turtles;
 		command.action = derivedAction<Entity>([this](Entity& e, sf::Time)
 		{
 			if (!getBattlefieldBounds().intersects(e.getBoundingRect()))
