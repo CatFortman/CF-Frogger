@@ -98,7 +98,7 @@ namespace GEX
 		adaptPlayerPostition();
 
 		_sceneGraph.update(deltaTime, getCommandQueue());
-		//std::cout << _player->getPosition().y << std::endl;
+		std::cout << _player->getPosition().y << std::endl;
 	}
 
 
@@ -124,7 +124,7 @@ namespace GEX
 		}
 
 		// set velocity back to zero when not on a log or turtle
-		if (_player->getPosition().y > 340)
+		if (_player->getPosition().y >= 340)
 		{
 			_player->setVelocity(0, 0);
 		}
@@ -320,7 +320,7 @@ namespace GEX
 						auto& enemy = static_cast<RiverObject&>(*pair.second);
 
 						// collision: Frogger is destroyed
-						player.setVelocity(enemy.getVelocity());
+						player.setVelocity(enemy.getVelocity().x, 0.f);
 					}
 				}
 			}
