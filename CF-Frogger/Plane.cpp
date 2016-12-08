@@ -1,3 +1,4 @@
+
 #include "Plane.h"
 #include "TextureHolder.h"
 #include "ResourceIdentifiers.h"
@@ -6,7 +7,7 @@
 #include "DataTables.h"
 
 #include <cassert>
-namespace GEX 
+namespace GEX
 {
 	const std::map<Frog::Type, FrogData> table = initializeFrogData();
 
@@ -20,7 +21,10 @@ namespace GEX
 		_sprite(TextureHolder::getInstance().get(table.at(type).texture), table.at(type).textureRect),
 		_directionIndex(0),
 		_jumping(false),
+		_dying(false),
 		_jumpTimer(0),
+		_points(0),
+		_deathTimer(),
 		_isMarkedForRemoval(false)
 	{
 		// set up the animation
@@ -55,19 +59,54 @@ namespace GEX
 	{
 	}
 
+	void Frog::playDeathAnimation()
+	{
+		if (_type == Frog::Type::Die1)
+		{
+			_deathTimer.restart();
+			_type = Frog::Type::Die2;
+			_sprite.setTexture(TextureHolder::getInstance().get(table.at(Frog::Type::Die1).texture));
+			_sprite.setTextureRect(table.at(Frog::Type::Die1).textureRect);
+		}
+		if ((_type == Frog::Type::Die2) && (_deathTimer.getElapsedTime() >= sf::milliseconds(500)))
+		{
+			_deathTimer.restart();
+			_type = Frog::Type::Die3;
+			_sprite.setTexture(TextureHolder::getInstance().get(table.at(Frog::Type::Die2).texture));
+			_sprite.setTextureRect(table.at(Frog::Type::Die2).textureRect);
+		}
+		if ((_type == Frog::Type::Die3) && (_deathTimer.getElapsedTime() >= sf::milliseconds(500)))
+		{
+			_deathTimer.restart();
+			_type = Frog::Type::Idle;
+			_sprite.setTexture(TextureHolder::getInstance().get(table.at(Frog::Type::Die3).texture));
+			_sprite.setTextureRect(table.at(Frog::Type::Die3).textureRect);
+		}
+		if ((_type == Frog::Type::Idle) && (_deathTimer.getElapsedTime() >= sf::milliseconds(500)))
+		{
+			_deathTimer.restart();
+			_sprite.setTexture(TextureHolder::getInstance().get(table.at(Frog::Type::Idle).texture));
+			_sprite.setTextureRect(table.at(Frog::Type::Idle).textureRect);
+			setIsDying(false);
+			setIsRespawning(true);
+		}
+	}
+
 	void Frog::updateCurrent(sf::Time dt, CommandQueue& commands)
 	{
-		// check if Idle died
-		if (isDestroyed())
+		// check if Frogger died
+		
+		if (!isDying() && !isRespawing())
 		{
-			return;
+			checkIfJumping();
+			_jumpTimer++;
+			movementUpdate(dt);
+			Entity::updateCurrent(dt, commands);
 		}
-
-		checkIfJumping();
-		_jumpTimer++;
-		movementUpdate(dt);
-		Entity::updateCurrent(dt, commands);
-
+		else
+		{
+			playDeathAnimation();
+		}
 		updateTexts();
 	}
 
@@ -88,6 +127,26 @@ namespace GEX
 		_jumping = jumping;
 	}
 
+	void Frog::setIsDying(bool dying)
+	{
+		_dying = dying;
+	}
+
+	bool Frog::isDying()
+	{
+		return _dying;
+	}
+
+	void Frog::setIsRespawning(bool respawning)
+	{
+		_respawning = respawning;
+	}
+
+	bool Frog::isRespawing()
+	{
+		return _respawning;
+	}
+
 	void Frog::checkIfJumping()
 	{
 		if (_jumpTimer == 15)
@@ -102,5 +161,10 @@ namespace GEX
 			_sprite.setTextureRect(table.at(Frog::Type::Jumping).textureRect);
 			isJumping(false);
 		}
+	}
+
+	void Frog::setType(Frog::Type type)
+	{
+		_type = type;
 	}
 }

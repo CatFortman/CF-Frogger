@@ -52,6 +52,9 @@ namespace GEX
 		TextureHolder::getInstance().load(TextureID::threeTurtles2, "Media/Textures/FroggerAtlas.png");
 		TextureHolder::getInstance().load(TextureID::threeTurtles3, "Media/Textures/FroggerAtlas.png");
 		TextureHolder::getInstance().load(TextureID::threeTurtles4, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::die1, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::die2, "Media/Textures/FroggerAtlas.png");
+		TextureHolder::getInstance().load(TextureID::die3, "Media/Textures/FroggerAtlas.png");
 
 		_statsText.setFont(FontHolder::getInstance().get(FontID::Main));
 		_statsText.setPosition(5.f, 5.f);

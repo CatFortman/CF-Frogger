@@ -41,6 +41,18 @@ namespace GEX
 		data[Frog::Type::Jumping].texture = TextureID::Frog;
 		data[Frog::Type::Jumping].textureRect = sf::IntRect(178, 62, 34, 32);
 
+		data[Frog::Type::Die1].hitPoints = 0;
+		data[Frog::Type::Die1].texture = TextureID::Frog;
+		data[Frog::Type::Die1].textureRect = sf::IntRect(108, 100, 29, 38);
+
+		data[Frog::Type::Die2].hitPoints = 0;
+		data[Frog::Type::Die2].texture = TextureID::Frog;
+		data[Frog::Type::Die2].textureRect = sf::IntRect(357, 100, 36, 40);
+
+		data[Frog::Type::Die3].hitPoints = 0;
+		data[Frog::Type::Die3].texture = TextureID::Frog;
+		data[Frog::Type::Die3].textureRect = sf::IntRect(283, 100, 34, 40);
+		
 		return data;
 	}
 

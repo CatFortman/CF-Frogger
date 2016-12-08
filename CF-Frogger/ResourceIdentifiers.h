@@ -38,7 +38,10 @@ namespace GEX
 		threeTurtles3,
 		threeTurtles4,
 		tree1,
-		tree2
+		tree2,
+		die1,
+		die2,
+		die3
 
 	};
 

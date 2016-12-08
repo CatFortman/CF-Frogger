@@ -21,6 +21,8 @@ These additions and modifications are my sole work for prog 1266
 #include "Plane.h"
 #include "Vehicle.h"
 #include "RiverObject.h"
+#include "SpriteNode.h"
+#include "TextureHolder.h"
 
 #include <vector>
 #include <array>
@@ -80,6 +82,10 @@ namespace GEX
 
 		void			adaptPlayerPostition();
 
+		void			respawnPlayer();
+
+		void			adjustFrogLives();
+
 		void			spawnEnemies();
 		void			addEnemies();
 		void			addEnemy(Vehicle::Type type, float relX, float relY);
@@ -98,7 +104,6 @@ namespace GEX
 			Ground,
 			Road,
 			RiverNode,
-			LaneNode,
 			LayerCount
 		};
 
@@ -115,6 +120,13 @@ namespace GEX
 
 		sf::Clock							_vehicleSpawnTimer;
 		sf::Clock							_riverSpawnTimer;
+
+		sf::Texture&						texture2 = TextureHolder::getInstance().get(TextureID::FrogLives);
+		sf::IntRect							textureRect2 = sf::IntRect(395, 100, 39, 40);
+
+		SpriteNode*			_frogLife1;
+		SpriteNode*			_frogLife2;
+		SpriteNode*			_frogLife3;
 
 		std::deque<SpawnPointVehicle>		_vehicleSpawnPoints;
 		std::deque<SpawnPointRiverObject>	_riverSpawnPoints;

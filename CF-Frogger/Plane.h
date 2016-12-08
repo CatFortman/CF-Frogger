@@ -12,7 +12,7 @@ namespace GEX
 	class Frog : public Entity
 	{
 	public:
-		enum class  Type{ Idle, Jumping, Dying};
+		enum class  Type{ Idle, Jumping, Die1, Die2, Die3};
 		
 	public:
 								Frog(Type type = Type::Idle);
@@ -26,8 +26,18 @@ namespace GEX
 
 		bool					isMarkedForRemoval() const;
 		
+		void					setIsDying(bool dying);
+		bool					isDying();
+
+		void					setIsRespawning(bool dying);
+		bool					isRespawing();
+
 		void					isJumping(bool jumping);
 		void					checkIfJumping();
+
+		void					playDeathAnimation();
+
+		void					setType(Frog::Type type);
 
 	private:
 		void					drawCurrent(sf::RenderTarget & target, sf::RenderStates state) const;
@@ -41,6 +51,10 @@ namespace GEX
 		Type					_type;
 		sf::Sprite				_sprite;
 
+		sf::Clock				_deathTimer;
+
+		bool				    _respawning;
+		bool					_dying;
 		bool					_jumping;
 		int						_jumpTimer;
 
@@ -48,6 +62,8 @@ namespace GEX
 		float					_travelDistance;
 
 		bool					_isMarkedForRemoval;
+
+		int						_points;
 	};
 
 }
