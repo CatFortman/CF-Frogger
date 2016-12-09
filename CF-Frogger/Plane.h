@@ -29,6 +29,8 @@ namespace GEX
 		void					setIsDying(bool dying);
 		bool					isDying();
 
+		void					tallyPoints();
+
 		void					setIsRespawning(bool dying);
 		bool					isRespawing();
 
@@ -51,12 +53,13 @@ namespace GEX
 		Type					_type;
 		sf::Sprite				_sprite;
 
-		sf::Clock				_deathTimer;
-
 		bool				    _respawning;
 		bool					_dying;
+		sf::Clock				_deathTimer;
+
 		bool					_jumping;
 		int						_jumpTimer;
+		sf::Vector2f			_highestJump;
 
 		int						_directionIndex;
 		float					_travelDistance;

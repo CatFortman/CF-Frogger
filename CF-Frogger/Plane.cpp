@@ -25,6 +25,7 @@ namespace GEX
 		_jumpTimer(0),
 		_points(0),
 		_deathTimer(),
+		_highestJump(0, 0),
 		_isMarkedForRemoval(false)
 	{
 		// set up the animation
@@ -114,6 +115,16 @@ namespace GEX
 			playDeathAnimation();
 		}
 		updateTexts();
+	}
+
+	void Frog::tallyPoints()
+	{
+		sf::Vector2f currentPosition = _sprite.getPosition();
+		if (currentPosition.x > _highestJump.x)
+		{
+			_highestJump = currentPosition;
+			_points += 10;
+		}
 	}
 
 	void Frog::updateTexts()
